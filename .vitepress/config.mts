@@ -112,7 +112,6 @@ export default defineConfig({
                         items: [
                             { text: '概览', link: '/doc-server/server' },
                             { text: '项目启动', link: '/doc-server/start' },
-                            { text: '依赖维护', link: '/doc-server/dependency' },
                         ]
                     },
                     {
@@ -182,7 +181,6 @@ export default defineConfig({
                         items: [
                             { text: '概览', link: '/doc-app/basic/overview' },
                             { text: '项目启动', link: '/doc-app/basic/start' },
-                            { text: '依赖维护', link: '/doc-app/basic/dependency' },
                         ]
                     },
                     {
