@@ -35,7 +35,7 @@ export default defineConfig({
     nav: [
       { text: '后端', link: '/doc-server/server.md' },
       { text: '前端', link: '/doc-web/web.md' },
-      { text: '移动端', link: '/doc-app/app.md' },
+      { text: '移动端', link: '/doc-app/basic/overview' },
       {
         text: '版本',
         items: [
@@ -180,54 +180,54 @@ export default defineConfig({
                     {
                         text: '基础',
                         items: [
-                            { text: '概览', link: '/doc-server/server' },
-                            { text: '项目启动', link: '/doc-server/start' },
-                            { text: '依赖维护', link: '/doc-server/dependency' },
+                            { text: '概览', link: '/doc-app/basic/overview' },
+                            { text: '项目启动', link: '/doc-app/basic/start' },
+                            { text: '依赖维护', link: '/doc-app/basic/dependency' },
                         ]
                     },
                     {
                         text: '开发规范',
                         items: [
-                            { text: 'api', link: '/doc-server/business' },
-                            { text: '页面与组件', link: '/doc-server/business' },
+                            { text: 'api', link: '/doc-app/standard/api' },
+                            { text: '页面与组件', link: '/doc-app/standard/component-page' },
                         ]
                     },
                     {
                         text: '核心机制',
                         items: [
-                            { text: '状态管理', link: '/doc-server/business' },
-                            { text: '路由与菜单', link: '/doc-server/redis' },
+                            { text: '状态管理', link: '/doc-app/core/store' },
+                            { text: '路由与菜单', link: '/doc-app/core/router' },
                         ]
                     },
                     {
                         text: '业务开发',
                         items: [
-                            { text: '用户信息', link: '/doc-server/business' },
-                            { text: '自定义图标', link: '/doc-server/business' },
-                            { text: '系统字典', link: '/doc-server/context' },
-                            { text: 'websocket', link: '/doc-server/redis' },
+                            { text: '用户信息', link: '/doc-app/business/user-info' },
+                            { text: '自定义图标', link: '/doc-app/business/icon' },
+                            { text: '系统字典', link: '/doc-app/business/dict' },
+                            { text: 'websocket', link: '/doc-app/business/websocket' },
                         ]
                     },
                     {
                         text: '系统工具',
                         items: [
-                            { text: '工具类', link: '/doc-server/business' }
+                            { text: '工具类', link: '/doc-app/utils/utils' }
                         ]
                     },
                     {
                         text: '内置组件',
                         items: [
-                            { text: '附件上传', link: '/doc-server/business' },
-                            { text: '颜色选择', link: '/doc-server/redis' },
-                            { text: '字典标签', link: '/doc-server/redis' },
-                            { text: '图标选择', link: '/doc-server/redis' },
-                            { text: '消息通知', link: '/doc-server/redis' },
+                            { text: '附件上传', link: '/doc-app/components/attachment' },
+                            { text: '颜色选择', link: '/doc-app/components/color-select' },
+                            { text: '字典标签', link: '/doc-app/components/dict-tag' },
+                            { text: '图标选择', link: '/doc-app/components/icon-select' },
+                            { text: '消息通知', link: '/doc-app/components/notice-message' },
                         ]
                     },
                     {
                         text: '项目部署',
                         items: [
-                            { text: '打包部署', link: '/doc-server/knife4j' }
+                            { text: '打包部署', link: '/doc-app/deploy/deploy' }
                         ]
                     }
                 ]
