@@ -194,7 +194,7 @@ export default defineConfig({
                         text: '核心机制',
                         items: [
                             { text: '状态管理', link: '/doc-app/core/store' },
-                            { text: '路由与菜单', link: '/doc-app/core/router' },
+                            { text: '路由', link: '/doc-app/core/router' },
                         ]
                     },
                     {
