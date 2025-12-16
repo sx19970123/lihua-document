@@ -10,7 +10,7 @@
 
 1. 前往仓库下载master分支代码 [仓库](https://gitee.com/yukino_git/lihua-app)
 
-   ![image-20251216132805953](/Users/yukino/MyCode/lihua-document/doc-app/basic/start.assets/image-20251216132805953.png)
+   ![image-20251216132805953](./start.assets/image-20251216132805953.png)
 
    ![image-20251216132901082](./start.assets/image-20251216132901082.png)
 
@@ -20,7 +20,7 @@
 
 3. 导入后在终端执行`npm install`命令安装依赖
 
-   ![image-20251216133432430](/Users/yukino/MyCode/lihua-document/doc-app/basic/start.assets/image-20251216133432430.png)
+   ![image-20251216133432430](./start.assets/image-20251216133432430.png)
 
    ![image-20251216133757008](./start.assets/image-20251216133757008.png)
 
