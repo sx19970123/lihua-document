@@ -33,7 +33,7 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '后端', link: '/doc-server/server.md' },
+      { text: '后端', link: '/doc-server/basic/overview' },
       { text: '前端', link: '/doc-web/web.md' },
       { text: '移动端', link: '/doc-app/basic/overview' },
       {
@@ -60,44 +60,44 @@ export default defineConfig({
                     {
                         text: '基础',
                         items: [
-                            { text: '概览', link: '/doc-server/server' },
-                            { text: '项目启动', link: '/doc-server/start' },
-                            { text: '新增子模块', link: '/doc-server/module' },
-                            { text: '依赖维护', link: '/doc-server/dependency' },
+                            { text: '概览', link: '/doc-server/basic/overview' },
+                            { text: '项目启动', link: '/doc-server/basic/start' },
+                            { text: '新增子模块', link: '/doc-server/basic/module' },
+                            { text: '依赖维护', link: '/doc-server/basic/dependency' },
                         ]
                     },
                     {
                         text: '开发规范',
                         items: [
-                            { text: 'controller', link: '/doc-server/business' },
-                            { text: 'service', link: '/doc-server/business' },
-                            { text: 'mapper', link: '/doc-server/business' },
-                            { text: '数据模型', link: '/doc-server/business' },
+                            { text: 'controller', link: '/doc-server/standard/controller' },
+                            { text: 'service', link: '/doc-server/standard/service' },
+                            { text: 'mapper', link: '/doc-server/standard/mapper' },
+                            { text: '数据模型', link: '/doc-server/standard/data' },
                         ]
                     },
                     {
                         text: '系统组件',
                         items: [
-                            { text: '用户上下文', link: '/doc-server/context' },
-                            { text: 'Redis 缓存', link: '/doc-server/redis' },
-                            { text: 'Excel 导入导出', link: '/doc-server/redis' },
-                            { text: '工具类', link: '/doc-server/utils' },
-                            { text: '注解', link: '/doc-server/annotation' },
-                            { text: '附件', link: '/doc-server/file' },
-                            { text: 'WebSocket', link: '/doc-server/websocket' },
-                            { text: '定时任务', link: '/doc-server/schedule' },
+                            { text: '用户上下文', link: '/doc-server/component/context' },
+                            { text: 'Redis 缓存', link: '/doc-server/component/redis' },
+                            { text: 'Excel 导入导出', link: '/doc-server/component/excel' },
+                            { text: '工具类', link: '/doc-server/component/utils' },
+                            { text: '注解', link: '/doc-server/component/annotation' },
+                            { text: '附件', link: '/doc-server/component/file' },
+                            { text: 'WebSocket', link: '/doc-server/component/websocket' },
+                            { text: '定时任务', link: '/doc-server/component/schedule' },
                         ]
                     },
                     {
                         text: '接口与文档',
                         items: [
-                            { text: 'Knife4j 文档', link: '/doc-server/knife4j' }
+                            { text: 'Knife4j 文档', link: '/doc-server/doc/knife4j' }
                         ]
                     },
                     {
                         text: '项目部署',
                         items: [
-                            { text: '项目打包', link: '/doc-server/knife4j' }
+                            { text: '打包部署', link: '/doc-server/deploy/deploy' }
                         ]
                     }
                 ]

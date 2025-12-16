@@ -48,60 +48,54 @@
 
 > 运行到iOS基座需要 Apple 颁发的证书及签名，[详见](https://uniapp.dcloud.net.cn/tutorial/run/ios-apple-certificate-signature.html)
 
-HbuilderX `运行` ` 运行到手机或模拟器` ` 运行到安卓或iOS App基座`
+1. HbuilderX `运行` ` 运行到手机或模拟器` ` 运行到安卓或iOS App基座`
 
-![image-20251216135016057](./start.assets/image-20251216135016057.png)
+   ![image-20251216135016057](./start.assets/image-20251216135016057.png)
 
-手机使用数据线连接电脑（安卓需要打开开发者模式，开启usb调试）找到自己的手机，选择基座类型后点击运行
+2. 手机使用数据线连接电脑（安卓需要打开开发者模式，开启usb调试）找到自己的手机，选择基座类型后点击运行
 
-![image-20251216135555103](./start.assets/image-20251216135555103.png)
+   ![image-20251216135555103](./start.assets/image-20251216135555103.png)
 
-编译完成后控制台会打印项目已启动，手机上会出现对应app
 
-![image-20251216135927240](./start.assets/image-20251216135927240.png)
 
-![image-20251216140059722](./start.assets/image-20251216140059722.png)
+3. 编译完成后控制台会打印项目已启动，手机上会出现对应app
 
-打开App显示此页面即启动成功
+   ![image-20251216135927240](./start.assets/image-20251216135927240.png)
 
-::: info 如显示 连接服务器失败，点击重试 则表示**后台服务未启动**或**.env**配置有误
+4. 打开App显示此页面即启动成功
 
-<div style="display:flex; flex-wrap:wrap; gap:8px;">
-    <img src="./start.assets/IMG_1934.png" width="45%" />
-    <img src="./start.assets/IMG_1935.png" width="45%" />
-</div>
+   ::: info 如显示 连接服务器失败，点击重试 则表示**后台服务未启动**或**.env**配置有误
 
-:::
+   <div style="display:flex; flex-wrap:wrap; gap:8px;">
+       <img src="./start.assets/IMG_1934.png" width="45%" />
+       <img src="./start.assets/IMG_1935.png" width="45%" />
+   </div>
+
+
+   :::
+
+
+
 
 ### 运行到微信小程序
 
 > 运行到微信小程序需提前[注册](https://mp.weixin.qq.com/cgi-bin/wx)，并确保电脑上安装了[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html)
 
-HbuilderX `运行` ` 运行到手机或模拟器` ` 微信开发者工具`
+1. HbuilderX `运行` ` 运行到手机或模拟器` ` 微信开发者工具`
 
-![image-20251216142738830](./start.assets/image-20251216142738830.png)
+   ![image-20251216142738830](./start.assets/image-20251216142738830.png)
 
-运行成功会自动调起微信开发者工具，第一次启动需要从 `设置` `通用设置` `安全` 中将 `服务端口` 打开
+2. 运行成功会自动调起微信开发者工具，第一次启动需要从 `设置` `通用设置` `安全` 中将 `服务端口` 打开
 
-![image-20251216143004955](./start.assets/image-20251216143004955.png)
+   ![image-20251216143004955](./start.assets/image-20251216143004955.png)
 
-运行成功后会提示 `fail appid missing` 将自己账号下的appid进行配置
+3. 运行成功后会提示 `fail appid missing` 将自己账号下的appid进行配置
 
-![image-20251216143353039](./start.assets/image-20251216143353039.png)
+   ![image-20251216143353039](./start.assets/image-20251216143353039.png)
 
-从项目 `src/manifest.json` 中 ` 微信小程序配置` 也可进行配置
+4. 从项目 `src/manifest.json` 中 ` 微信小程序配置` 也可进行配置
 
-![image-20251216143827805](./start.assets/image-20251216143827805.png)
-
-
-
-
-
-
-
-
-
-
+   ![image-20251216143827805](./start.assets/image-20251216143827805.png)
 
 
 
