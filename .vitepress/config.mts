@@ -128,7 +128,7 @@ export default defineConfig({
                             { text: 'layout', link: '/doc-server/context' },
                             { text: '系统字典', link: '/doc-server/context' },
                             { text: '自定义图标', link: '/doc-server/context' },
-                            { text: 'websocket', link: '/doc-server/redis' },
+                            { text: 'Websocket', link: '/doc-server/redis' },
                         ]
                     },
                     {
@@ -204,7 +204,7 @@ export default defineConfig({
                             { text: '根节点', link: '/doc-app/development/root' },
                             { text: '自定义图标', link: '/doc-app/development/icon' },
                             { text: '系统字典', link: '/doc-app/development/dict' },
-                            { text: 'websocket', link: '/doc-app/development/websocket' }
+                            { text: 'Websocket', link: '/doc-app/development/websocket' }
                         ]
                     },
                     {
