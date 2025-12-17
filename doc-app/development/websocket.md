@@ -1,6 +1,6 @@
 # websocket
 
-系统集成了websocket `.env`中配置后台ip即可使用
+系统集成了websocket `.env` 中配置后台ip即可使用
 ```typescript
 // 使用websocket需要先引入到组件
 import { websocket } from '@/utils/WebSocket'
