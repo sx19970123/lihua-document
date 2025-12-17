@@ -117,14 +117,14 @@ export default defineConfig({
                     {
                         text: '开发规范',
                         items: [
-                            { text: 'api', link: '/doc-server/business' },
-                            { text: '页面与组件', link: '/doc-server/business' },
+                            { text: 'api', link: '/doc-server/development' },
+                            { text: '页面与组件', link: '/doc-server/development' },
                         ]
                     },
                     {
                         text: '业务开发',
                         items: [
-                            { text: '用户信息', link: '/doc-server/business' },
+                            { text: '用户信息', link: '/doc-server/development' },
                             { text: 'layout', link: '/doc-server/context' },
                             { text: '系统字典', link: '/doc-server/context' },
                             { text: '自定义图标', link: '/doc-server/context' },
@@ -134,21 +134,21 @@ export default defineConfig({
                     {
                         text: '核心机制',
                         items: [
-                            { text: '状态管理', link: '/doc-server/business' },
+                            { text: '状态管理', link: '/doc-server/development' },
                             { text: '路由与菜单', link: '/doc-server/redis' },
                         ]
                     },
                     {
                         text: '系统工具',
                         items: [
-                            { text: '工具类', link: '/doc-server/business' },
+                            { text: '工具类', link: '/doc-server/development' },
                             { text: '指令', link: '/doc-server/redis' },
                         ]
                     },
                     {
                         text: '内置组件',
                         items: [
-                            { text: '可展开卡片', link: '/doc-server/business' },
+                            { text: '可展开卡片', link: '/doc-server/development' },
                             { text: '用户展示', link: '/doc-server/redis' },
                             { text: '字典标签', link: '/doc-server/redis' },
                             { text: '全屏遮罩', link: '/doc-server/redis' },
@@ -200,10 +200,10 @@ export default defineConfig({
                     {
                         text: '业务开发',
                         items: [
-                            { text: '用户信息', link: '/doc-app/business/user-info' },
-                            { text: '自定义图标', link: '/doc-app/business/icon' },
-                            { text: '系统字典', link: '/doc-app/business/dict' },
-                            { text: 'websocket', link: '/doc-app/business/websocket' },
+                            { text: '用户信息', link: '/doc-app/development/user-info' },
+                            { text: '自定义图标', link: '/doc-app/development/icon' },
+                            { text: '系统字典', link: '/doc-app/development/dict' },
+                            { text: 'websocket', link: '/doc-app/development/websocket' },
                         ]
                     },
                     {
