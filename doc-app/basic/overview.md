@@ -63,7 +63,7 @@
 
 
 ## 📁 项目目录结构
-
+项目采用cli方式创建
 ```text
 ├── .env.development                # 开发环境配置文件
 ├── .env.production                 # 生产环境配置文件
