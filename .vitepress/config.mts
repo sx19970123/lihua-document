@@ -201,9 +201,10 @@ export default defineConfig({
                         text: '业务开发',
                         items: [
                             { text: '用户信息', link: '/doc-app/development/user-info' },
+                            { text: '根节点', link: '/doc-app/development/root' },
                             { text: '自定义图标', link: '/doc-app/development/icon' },
                             { text: '系统字典', link: '/doc-app/development/dict' },
-                            { text: 'websocket', link: '/doc-app/development/websocket' },
+                            { text: 'websocket', link: '/doc-app/development/websocket' }
                         ]
                     },
                     {

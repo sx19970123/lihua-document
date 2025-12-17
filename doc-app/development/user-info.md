@@ -14,12 +14,12 @@
 2. 调用 store 中提供的 state 和 actions
 
    ``` typescript
-   userStore.$state.nickname
+   const nickname = userStore.$state.nickname
    ```
 
 3. 可获取到的数据
 
-   ``` text
+   ``` typescript
    // 用户相关数据
    const userInfo: UserInfoType
    const userId: string
