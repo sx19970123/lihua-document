@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /markdown-examples
+      link: /doc-server/basic/overview
     - theme: alt
       text: 在线预览
       link: https://lihua.xyz/

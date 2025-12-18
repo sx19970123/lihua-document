@@ -33,9 +33,9 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: '后端', link: '/doc-server/basic/overview' },
-      { text: '前端', link: '/doc-web/web.md' },
-      { text: '移动端', link: '/doc-app/basic/overview' },
+      { text: '后端', link: '/doc-server/basic/overview', activeMatch: '^/doc-server/' },
+      { text: '前端', link: '/doc-web/basic/overview', activeMatch: '^/doc-web/' },
+      { text: '移动端', link: '/doc-app/basic/overview', activeMatch: '^/doc-app/' },
       {
         text: '版本',
         items: [
@@ -110,63 +110,72 @@ export default defineConfig({
                     {
                         text: '基础',
                         items: [
-                            { text: '概览', link: '/doc-server/server' },
-                            { text: '项目启动', link: '/doc-server/start' },
+                            { text: '概览', link: '/doc-web/basic/overview' },
+                            { text: '项目启动', link: '/doc-web/basic/start' },
                         ]
                     },
                     {
                         text: '开发规范',
                         items: [
-                            { text: 'api', link: '/doc-server/development' },
-                            { text: '页面与组件', link: '/doc-server/development' },
+                            { text: 'api', link: '/doc-web/standard/api' },
+                            { text: '页面与组件', link: '/doc-web/standard/component-page' },
                         ]
                     },
                     {
                         text: '业务开发',
                         items: [
-                            { text: '用户信息', link: '/doc-server/development' },
-                            { text: 'layout', link: '/doc-server/context' },
-                            { text: '系统字典', link: '/doc-server/context' },
-                            { text: '自定义图标', link: '/doc-server/context' },
-                            { text: 'Websocket', link: '/doc-server/redis' },
+                            { text: '用户信息', link: '/doc-web/development/user-info' },
+                            { text: 'layout', link: '/doc-web/development/layout' },
+                            { text: '系统字典', link: '/doc-web/development/sys-dict' },
+                            { text: '自定义图标', link: '/doc-web/development/icon' },
+                            { text: 'Websocket', link: '/doc-web/development/websocket' },
                         ]
                     },
                     {
                         text: '核心机制',
                         items: [
-                            { text: '状态管理', link: '/doc-server/development' },
-                            { text: '路由与菜单', link: '/doc-server/redis' },
+                            { text: '状态管理', link: '/doc-web/core/store' },
+                            { text: '路由与菜单', link: '/doc-web/core/router' },
                         ]
                     },
                     {
                         text: '系统工具',
                         items: [
-                            { text: '工具类', link: '/doc-server/development' },
-                            { text: '指令', link: '/doc-server/redis' },
+                            { text: '工具类', link: '/doc-web/utils/utils' },
+                            { text: '指令', link: '/doc-web/utils/directive' },
                         ]
                     },
                     {
                         text: '内置组件',
                         items: [
-                            { text: '可展开卡片', link: '/doc-server/development' },
-                            { text: '用户展示', link: '/doc-server/redis' },
-                            { text: '字典标签', link: '/doc-server/redis' },
-                            { text: '全屏遮罩', link: '/doc-server/redis' },
-                            { text: '表格设置', link: '/doc-server/redis' },
-                            { text: '简单树形选择', link: '/doc-server/redis' },
-                            { text: '可选择卡片', link: '/doc-server/redis' },
-                            { text: '富文本编辑器', link: '/doc-server/redis' },
-                            { text: '颜色选择', link: '/doc-server/redis' },
-                            { text: '图标选择', link: '/doc-server/redis' },
-                            { text: '图片剪裁', link: '/doc-server/redis' },
-                            { text: '用户选择', link: '/doc-server/redis' },
-                            { text: '附件上传', link: '/doc-server/redis' },
+                            {
+                                text: '数据展示',
+                                items: [
+                                    { text: '可展开卡片', link: '/doc-web/components/expandable-card' },
+                                    { text: '用户展示', link: '/doc-web/components/user-show' },
+                                    { text: '字典标签', link: '/doc-web/components/dict-tag' },
+                                    { text: '全屏遮罩', link: '/doc-web/components/mask' },
+                                    { text: '表格设置', link: '/doc-web/components/table-setting' }
+                                ]
+                            },{
+                                text: '数据绑定',
+                                items: [
+                                    { text: '简单树形选择', link: '/doc-web/components/easy-tree-select' },
+                                    { text: '可选择卡片', link: '/doc-web/components/selectable-card' },
+                                    { text: '富文本编辑器', link: '/doc-web/components/editor' },
+                                    { text: '颜色选择', link: '/doc-web/components/color-select' },
+                                    { text: '图标选择', link: '/doc-web/components/icon-select' },
+                                    { text: '图片剪裁', link: '/doc-web/components/image-cropper' },
+                                    { text: '用户选择', link: '/doc-web/components/user-select' },
+                                    { text: '附件上传', link: '/doc-web/components/attachment-upload' }
+                                ]
+                            }
                         ]
                     },
                     {
                         text: '项目部署',
                         items: [
-                            { text: '项目打包', link: '/doc-server/knife4j' }
+                            { text: '打包部署', link: '/doc-web/deploy/deploy' }
                         ]
                     }
                 ]
@@ -216,11 +225,21 @@ export default defineConfig({
                     {
                         text: '内置组件',
                         items: [
-                            { text: '附件上传', link: '/doc-app/components/attachment' },
-                            { text: '颜色选择', link: '/doc-app/components/color-select' },
-                            { text: '字典标签', link: '/doc-app/components/dict-tag' },
-                            { text: '图标选择', link: '/doc-app/components/icon-select' },
-                            { text: '消息通知', link: '/doc-app/components/notice-message' },
+                            {
+                                text: '数据展示',
+                                items: [
+                                    { text: '字典标签', link: '/doc-app/components/dict-tag' },
+                                    { text: '消息通知', link: '/doc-app/components/notice-message' },
+                                ]
+                            },
+                            {
+                                text: '数据绑定',
+                                items: [
+                                    { text: '附件上传', link: '/doc-app/components/attachment' },
+                                    { text: '颜色选择', link: '/doc-app/components/color-select' },
+                                    { text: '图标选择', link: '/doc-app/components/icon-select' },
+                                ]
+                            }
                         ]
                     },
                     {

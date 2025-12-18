@@ -48,7 +48,7 @@
 
 ## 🖼️ 项目截图
 
-::: info ㅤ 
+::: info 部分截图
 
 <div style="display:flex; flex-wrap:wrap; gap:8px;">
 	<img src="./overview.assets/IMG_1917.png" width="32%" />
