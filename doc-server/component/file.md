@@ -50,7 +50,7 @@ AttachmentStorageStrategy 接口共有 9 个抽象方法（其中四个为分片
 
 ::: info
 
- 扩展完成后若无其他需求就不用改动其他代码，直接使用  [附件上传](document/component/ATTACHMENT-UPLOAD.md) 组件即可
+ 扩展完成后若无其他需求就不用改动其他代码，直接使用  [附件上传](/doc-web/components/attachment-upload) 组件即可
 
 调用SysAttachmentStorageController下的附件上传接口，按要求传递参数，附件会进入【附件管理】
 

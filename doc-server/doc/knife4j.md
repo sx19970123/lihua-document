@@ -78,4 +78,4 @@ public class Knife4jConfig {
 
 ## 查看文档
 
-后端项目启动后访问 `http://ip:端口/doc.html` 即可查看接口文档，例如http://localhost:8080/doc.html
+后端项目启动后访问/doc.html即可查看接口文档

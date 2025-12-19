@@ -42,10 +42,10 @@
 ::: info 部分截图
 
 <div style="display:flex; flex-wrap:wrap; gap:8px;">
-   	<img src="./overview.assets/static-image%2F登录页.jpg" width="100%" />
-    <img src="./overview.assets/static-image%2F注册页.jpg" width="100%" />
-    <img src="./overview.assets/static-image%2F首页.jpg" width="100%" />
-    <img src="./overview.assets/static-image%2F首页-暗色.jpg" width="100%" />
+   	<img src="./overview.assets/登录页.jpg" width="100%" />
+    <img src="./overview.assets/注册页.jpg" width="100%" />
+    <img src="./overview.assets/首页.jpg" width="100%" />
+    <img src="./overview.assets/首页-暗色.jpg" width="100%" />
 </div>
 
 :::

@@ -26,7 +26,7 @@
 
 ## 基础配置
 
-> 请确保狸花猫后台(1.3.0+)已正常启动，填写正确的ip及端口 [后台启动教程](../../doc-server/server)
+> 请确保狸花猫后台(1.3.0+)已正常启动，填写正确的ip及端口 [后台启动教程](/doc-server/basic/overview)
 
 1. 找到项目下`.env`  环境变量配置，根据自己后台情况配置 `VITE_APP_BASE_API` 和 `VITE_APP_WS_API`
 
