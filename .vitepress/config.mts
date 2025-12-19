@@ -262,8 +262,8 @@ export default defineConfig({
     },
     socialLinks: [
       { icon: 'gitee', link: 'https://gitee.com/yukino_git' },
-      { icon: 'github', link: 'https://github.com/sx19970123/lihua' },
-      { icon: 'gitcode', link: 'https://gitcode.com/weixin_44118742/lihua' },
+      { icon: 'github', link: 'https://github.com/sx19970123' },
+      { icon: 'gitcode', link: 'https://gitcode.com/weixin_44118742' },
     ]
   }
 })
