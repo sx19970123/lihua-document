@@ -89,7 +89,7 @@ const {sys_notice_type} = initDict("sys_notice_type")
 const label = getDictLabel(sys_notice_type.value, '1')
 ```
 ## 在模板中使用
-模板中可以将字典翻译为tag标签，样式颜色与后端定义的相同。使用时需要保证 dict-data-value 值存在，可以使用v-if进行判断加载
+模板中可以将字典翻译为tag标签，样式颜色与后端定义的相同。使用时需要保证 dict-data-value 值存在，可以使用v-if进行判断加载，[详见](/doc-app/components/dict-tag)
 ``` vue
 <template>
 	<view class="content">

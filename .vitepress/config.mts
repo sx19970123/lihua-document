@@ -126,6 +126,7 @@ export default defineConfig({
                         items: [
                             { text: '用户信息', link: '/doc-web/development/user-info' },
                             { text: 'layout', link: '/doc-web/development/layout' },
+                            { text: '系统主题', link: '/doc-web/development/theme' },
                             { text: '系统字典', link: '/doc-web/development/sys-dict' },
                             { text: '自定义图标', link: '/doc-web/development/icon' },
                             { text: 'Websocket', link: '/doc-web/development/websocket' },
