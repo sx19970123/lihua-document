@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/lihua-document/',
   title: "狸花猫后台管理系统",
   // 浏览器标签页logo监听暗色模式变化
   head: [
