@@ -97,7 +97,8 @@ export default defineConfig({
                     {
                         text: '项目部署',
                         items: [
-                            { text: '打包部署', link: '/doc-server/deploy/deploy' }
+                            { text: '打包部署', link: '/doc-server/deploy/deploy' },
+                            { text: 'docker部署', link: '/doc-server/deploy/docker' },
                         ]
                     }
                 ]
@@ -176,7 +177,8 @@ export default defineConfig({
                     {
                         text: '项目部署',
                         items: [
-                            { text: '打包部署', link: '/doc-web/deploy/deploy' }
+                            { text: '打包部署', link: '/doc-web/deploy/deploy' },
+                            { text: 'docker部署', link: '/doc-web/deploy/docker' },
                         ]
                     }
                 ]
