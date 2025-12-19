@@ -164,10 +164,10 @@ public enum ResultCodeEnum {
 
 ## 请求日志
 
-项目中提供了 `@Log` 注解进行日志记录，详细用法参考 [注解]()
+项目中提供了 `@Log` 注解进行日志记录，详细用法参考 [注解](/doc-server/component/annotation.html#日志记录)
 
 
 
 ## 接口限流
 
-项目中提供了 `@RateLimiter` 注解进行限流；`@PreventDuplicateSubmit` 注解防止重复提交，详细用法参考 [注解]()
+项目中提供了 `@RateLimiter` 注解进行限流；`@PreventDuplicateSubmit` 注解防止重复提交，详细用法参考 [注解](/doc-server/component/annotation.html#限流)
