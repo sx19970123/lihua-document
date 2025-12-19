@@ -2,17 +2,17 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/lihua-document/',
+  base: '/',
   title: "狸花猫后台管理系统",
   // 浏览器标签页logo监听暗色模式变化
   head: [
-    ['link', { rel: 'icon', href: '/lihua-document/miaomiao.png' }],
+    ['link', { rel: 'icon', href: '/miaomiao.png' }],
     ['script', {}, `
       (function() {
         const link = document.querySelector("link[rel='icon']")
         function setFavicon() {
           const isDark = document.documentElement.classList.contains('dark')
-          link.href = isDark ? '/lihua-document/heihei.png' : '/lihua-document/miaomiao.png'
+          link.href = isDark ? '/heihei.png' : '/miaomiao.png'
         }
         setFavicon()
         new MutationObserver(setFavicon).observe(
