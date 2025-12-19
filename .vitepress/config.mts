@@ -6,13 +6,13 @@ export default defineConfig({
   title: "狸花猫后台管理系统",
   // 浏览器标签页logo监听暗色模式变化
   head: [
-    ['link', { rel: 'icon', href: '/static-logo/miaomiao.png' }],
+    ['link', { rel: 'icon', href: '/miaomiao.png' }],
     ['script', {}, `
       (function() {
         const link = document.querySelector("link[rel='icon']")
         function setFavicon() {
           const isDark = document.documentElement.classList.contains('dark')
-          link.href = isDark ? '/static-logo/heihei.png' : '/static-logo/miaomiao.png'
+          link.href = isDark ? '/heihei.png' : '/miaomiao.png'
         }
         setFavicon()
         new MutationObserver(setFavicon).observe(
@@ -29,8 +29,8 @@ export default defineConfig({
       provider: 'local'
     },
     logo: {
-      light: '/static-logo/miaomiao.png',  // 亮色主题图标
-      dark: '/static-logo/heihei.png',    // 暗色主题图标
+      light: '/miaomiao.png',  // 亮色主题图标
+      dark: '/heihei.png',    // 暗色主题图标
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
