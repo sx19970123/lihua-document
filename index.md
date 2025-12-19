@@ -15,7 +15,7 @@ hero:
       link: https://lihua.xyz/
     - theme: alt
       text: 介绍
-      link: /api-examples
+      link: /home/overview
 
 
 features:
