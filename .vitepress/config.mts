@@ -40,7 +40,7 @@ export default defineConfig({
       {
         text: '版本',
         items: [
-          { text: 'web端 1.3.0', link: 'https://gitee.com/yukino_git/lihua/releases' },
+          { text: 'web端 1.4.0', link: 'https://gitee.com/yukino_git/lihua/releases' },
           { text: '移动端 1.0.0', link: 'https://gitee.com/yukino_git/lihua-app/releases' }
         ]
       }
