@@ -5,17 +5,22 @@ layout: home
 hero:
   name: "Lihua"
   text: "狸花猫后台管理系统"
-  tagline: "Spring Boot 后端 · Vue 3 前端 · UniApp 移动端"
+  tagline: "Spring Boot 后端 · Vue 前端 · UniApp 移动端"
   actions:
-    - theme: brand
-      text: 快速开始
-      link: /doc-server/basic/overview
+    - theme: alt
+      text: 介绍
+      link: /home/overview
     - theme: alt
       text: 在线预览
       link: https://lihua.xyz/
     - theme: alt
-      text: 介绍
-      link: /home/overview
+      text: 进入 1.0 文档
+      link: /1.0/doc-server/basic/overview
+    - theme: brand
+      text: 进入 2.0 文档（正在施工...）
+      link: /2.0/doc-server/basic/overview
+
+
 
 
 features:
