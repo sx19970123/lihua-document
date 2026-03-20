@@ -4,7 +4,7 @@
 
 ## 环境准备
 
-- Java版本：21
+- Java版本：21｜25
 - MySQL版本：8.0+
 - Redis：3.0+
 - Maven：3.0+
@@ -70,10 +70,9 @@
 
 **application-dev.yml**
 
-- 附件路径：`lihua.uploadFilePath` 配置附件上传路径
-- Excel导出路径： `lihua.exportFilePath` 配置附件上传路径
+- 附件路径：`attachment.uploadFilePath` 配置附件上传路径
 - 数据库连接：`spring.datasource.dynamic.datasource.master` 下配置 `url` `username` `password`
-- Redis连接：`spring.data.redis` 下配置 `host` `port` `password`
+- Redis连接：`spring.redis.redisson.config` 下配置 `address` `password`
 - 日志路径：`logging.file.name` 配置日志保存路径
 
 

@@ -10,35 +10,35 @@
 
 ``` xml
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
 
-        <lihua.version>1.3.0</lihua.version>
+        <lihua.version>2.0.0</lihua.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mysql.version>8.2.0</mysql.version>
-        <mybatis-plus.version>3.5.14</mybatis-plus.version>
-        <jwt.version>3.10.3</jwt.version>
-        <myexcel.version>4.5.6</myexcel.version>
+        <mybatis-plus.version>3.5.16</mybatis-plus.version>
+        <jwt.version>4.5.1</jwt.version>
+        <redisson.version>4.2.0</redisson.version>
         <oshi.version>6.6.4</oshi.version>
-        <guava.version>33.3.1-jre</guava.version>
-        <xxl-job.version>3.3.0</xxl-job.version>
-        <tianai-captcha.version>1.5.3</tianai-captcha.version>
-        <minio.version>8.6.0</minio.version>
-        <okhttp3.version>5.1.0</okhttp3.version>
-        <knife4j.version>4.5.0</knife4j.version>
+        <guava.version>33.5.0-jre</guava.version>
+        <tianai-captcha.version>1.5.5</tianai-captcha.version>
         <ipaddress.version>5.5.1</ipaddress.version>
         <ip2region.version>3.2.0</ip2region.version>
-        <dynamic-datasource.version>4.3.1</dynamic-datasource.version>
+        <dynamic-datasource.version>4.5.0</dynamic-datasource.version>
+        <fesod.version>2.0.1-incubating</fesod.version>
+        <oss.version>3.18.5</oss.version>
+        <spring-doc.version>3.0.2</spring-doc.version>
+        <snail-job.version>1.10.0-beta1</snail-job.version>
     </properties>
 ```
 
-使用时通过 `${knife4j.version}` 引入
+使用时通过 `${fesod.version}` 引入
 
 ``` xml
 <dependency>
-    <groupId>com.github.xiaoymin</groupId>
-    <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-    <version>${knife4j.version}</version>
+    <groupId>org.apache.fesod</groupId>
+    <artifactId>fesod-sheet</artifactId>
+    <version>${fesod.version}</version>
 </dependency>
 ```
 
