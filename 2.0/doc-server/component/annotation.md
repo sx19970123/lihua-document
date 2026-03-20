@@ -22,55 +22,6 @@ public String login(@RequestBody @Valid CurrentUser currentUser) {
 }
 ```
 
-## 限流
-
-`@RateLimiter` 在需要记录的 `controller` 接口上打上该注解，执行该接口时会进行限流处理
-
-参数
-
-- value：同一请求每秒超过 value 次之后的请求全部拒绝（默认 5）
-
-``` java
-@PostMapping("reloadData")
-@RateLimiter
-public String reloadData() {
-    sysAuthenticationService.cacheLoginUserInfo(LoginUserContext.getLoginUser());
-    return success();
-}
-
-// 该接口每秒只能处理10次，超出的请求全部丢弃
-@PostMapping("login")
-@RateLimiter(10)
-public String login(@RequestBody @Valid CurrentUser currentUser) {
-    return success();
-}
-```
-
-## 防重复提交
-
-`@PreventDuplicateSubmit` 在需要记录的 `controller` 接口上打上该注解，执行该接口时会检测同一用户再规定时间内是否请求多次，多余请求会拒绝处理
-
-参数
-
-- value：同一用户在 value 时间内只能请求一次（默认 1000 毫秒）
-- timeUnit：value 时间单位（默认 TimeUnit.MILLISECONDS）
-
-``` java
-// 同一用户1秒内只能访问该接口一次
-@PostMapping
-@PreventDuplicateSubmit
-public String save(@RequestBody @Validated SysDept sysDept) {
-    return success(sysDeptService.saveDept(sysDept));
-}
-
-// 同一用户1天内只能访问该接口一次
-@PostMapping
-@PreventDuplicateSubmit(value = 1, timeUnit = TimeUnit.DAYS)
-public String save(@RequestBody @Validated SysDept sysDept) {
-    return success(sysDeptService.saveDept(sysDept));
-}
-```
-
 ##  权限验证
 
 > SpringSecurity注解，详情请参考[官方文档](https://docs.spring.io/spring-security/reference/servlet/authorization/method-security.html)

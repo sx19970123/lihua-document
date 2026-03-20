@@ -10,7 +10,7 @@
 
 ### 返回 String
 
-Controller 类继承 `StrResponseController`，方法定义返回值为 `String`。 这种情况下数据在业务工具中转为了Json，优势是无需考虑Controller的返回类型，非附件的情况下直接返回`String`即可。**适合前后端分离人不分离的场景** 这种模式下 `knife4j` 无法获取返回值的对象属性，不利于前后端沟通
+Controller 类继承 `StrResponseController`，方法定义返回值为 `String`。 这种情况下数据在业务工具中转为了Json，优势是无需考虑Controller的返回类型，非附件的情况下直接返回`String`即可。**适合前后端分离人不分离的场景** 这种模式下 `SpringDoc` 无法获取返回值的对象属性，不利于前后端沟通
 
 ``` java
 package com.lihua;
@@ -36,7 +36,7 @@ public class TestController extends StrResponseController {
 
 ### 返回 ApiResponseModel\<T\>
 
-Controller 类继承 `ApiResponseController`，方法定义返回值为 `ApiResponseModel<T>` 由MVC序列化为Json数据，优势是可以集成 `knife4j` 接口返回值文档清晰。**适合前后端分离的场景**
+Controller 类继承 `ApiResponseController`，方法定义返回值为 `ApiResponseModel<T>` 由MVC序列化为Json数据，优势是可以集成 `SpringDoc` 接口返回值文档清晰。**适合前后端分离的场景**
 
 ``` java
 package com.lihua;
@@ -95,11 +95,11 @@ public ResponseEntity<StreamingResponseBody> download(@RequestParam(name = "file
 
 ``` java
 public class ApiResponseModel<T> {
-    @Schema(name = "code", description = "api请求正常默认值为200")
+    // api请求正常默认值为200
     private Integer code;
-    @Schema(name = "msg", description = "api请求正常默认值为成功")
+    // api请求正常默认值为成功
     private String msg;
-    @Schema(name = "data", description = "api请求响应对象")
+    // api请求响应对象
     private T data;
 }
 ```
@@ -113,11 +113,16 @@ public class ApiResponseModel<T> {
 > 调用 error 返回时，强制要求传入 ResultCodeEnum 枚举来规范统一返回，可对返回的 msg 进行自定义，但code无法修改
 
 ``` java
+/**
+ * 定义 controller 统一返回code 和 默认msg
+ */
+@AllArgsConstructor
+@Getter
 public enum ResultCodeEnum {
 
     SUCCESS (200,"成功"),
     PARAMS_ERROR(400,"参数异常"),
-    AUTHENTICATION_EXPIRED(401,"身份验证过期，请重新登陆"),
+    AUTHENTICATION_EXPIRED(401,"身份验证过期，请重新登录"),
     PARAMS_MISSING(402,"参数缺失或不完整"),
     ACCESS_ERROR (403,"用户权限不足"),
     RESOURCE_NOT_FOUND_ERROR(404,"请求的资源不存在"),
@@ -126,14 +131,13 @@ public enum ResultCodeEnum {
     IP_ILLEGAL_ERROR(407, "暂时无法为该地区提供服务"),
     ERROR (500,"业务异常"),
     FILE_ERROR (501,"附件处理异常"),
-    RATE_LIMITER_ERROR (502,"系统繁忙，请稍后再试"),
     SERVER_BAD_ERROR (503,"服务不可用"),
     MAX_UPLOAD_SIZE_EXCEEDED_ERROR (504,"上传的附件超过了允许的最大大小限制"),
     SERVER_UNAVAILABLE (505,"服务器维护中"),
     CAPTCHA_ERROR(506,"验证码错误"),
     SENSITIVE_ERROR(507,"数据脱敏异常"),
-    DUPLICATE_SUBMIT_ERROR (508,"请勿重复提交"),
-    WEBSOCKET_SEND_MSG_ERROR (509,"websocket发送消息异常");
+    WEBSOCKET_SEND_MSG_ERROR (509,"websocket发送消息异常"),
+    EXCEL_IMPORT_ERROR (510,"Excel导入异常");
 
     /**
      * 状态码
@@ -146,13 +150,14 @@ public enum ResultCodeEnum {
     private final String defaultMsg;
 
 }
+
 ```
 
 
 
-## knife4j
+## SpringDoc
 
-使用 `@Tag` `@Operation` 等注解即可生成对应的接口文档。[详细用法参考官方文档](https://doc.xiaominfo.com/docs/quick-start)
+使用 `@Tag` `@Operation` 等注解即可生成对应的接口文档。[详细用法参考官方文档](https://springdoc.springframework.org.cn/#modules)
 
 
 
@@ -164,10 +169,4 @@ public enum ResultCodeEnum {
 
 ## 请求日志
 
-项目中提供了 `@Log` 注解进行日志记录，详细用法参考 [注解](/doc-server/component/annotation.html#日志记录)
-
-
-
-## 接口限流
-
-项目中提供了 `@RateLimiter` 注解进行限流；`@PreventDuplicateSubmit` 注解防止重复提交，详细用法参考 [注解](/doc-server/component/annotation.html#限流)
+项目中提供了 `@Log` 注解进行日志记录，详细用法参考 [注解](/2.0/doc-server/component/annotation.html#日志记录)
