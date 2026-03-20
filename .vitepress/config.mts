@@ -97,10 +97,19 @@ export default defineConfig({
         }
 
         function markVersionFlyout() {
+          const versionInPath = getVersionFromPath(location.pathname)
           document.querySelectorAll('.VPNavBarMenu .VPFlyout .button').forEach((btn) => {
             const text = (btn.textContent || '').trim()
-            if (text === '版本') {
+            const isVersionButton = btn.getAttribute('data-version-menu') === 'true' || text === '版本' || text.startsWith('v')
+            if (isVersionButton) {
               btn.setAttribute('data-version-menu', 'true')
+              const label = versionInPath ? ('v' + versionInPath) : '版本'
+              const textEl = btn.querySelector('.text')
+              if (textEl) {
+                textEl.textContent = label
+              } else {
+                btn.textContent = label
+              }
             }
           })
         }
@@ -141,8 +150,8 @@ export default defineConfig({
       {
         text: '版本',
         items: [
-          { text: '1.0', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/(doc-server|doc-web|doc-app)/' },
-          { text: '2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-web|doc-app)/' }
+          { text: 'v1.0', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/(doc-server|doc-web|doc-app)/' },
+          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-web|doc-app)/' }
         ]
       },
       { text: '后端', link: '/1.0/doc-server/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-server/' },
