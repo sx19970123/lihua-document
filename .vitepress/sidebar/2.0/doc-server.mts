@@ -23,21 +23,23 @@ export const sidebarDocServerV2: SidebarItem[] = [
         ]
       },
       {
-        text: '系统组件',
+        text: 'base 基础能力层',
         items: [
-          { text: '用户上下文', link: '/2.0/doc-server/component/context' },
-          { text: 'Redis 缓存', link: '/2.0/doc-server/component/redis' },
-          { text: 'Excel 导入导出', link: '/2.0/doc-server/component/excel' },
-          { text: '工具类', link: '/2.0/doc-server/component/utils' },
-          { text: '注解', link: '/2.0/doc-server/component/annotation' },
-          { text: '附件', link: '/2.0/doc-server/component/file' },
-          { text: 'WebSocket', link: '/2.0/doc-server/component/websocket' },
-          { text: '定时任务', link: '/2.0/doc-server/component/schedule' },
+          { text: 'attachment 附件', link: '/2.0/doc-server/base/attachment' },
+          { text: 'captcha 验证码', link: '/2.0/doc-server/base/captcha' },
+          { text: 'common 公共模块', link: '/2.0/doc-server/base/common' },
+          { text: 'dict 字典', link: '/2.0/doc-server/base/dict' },
+          { text: 'doc 接口文档', link: '/2.0/doc-server/base/doc' },
+          { text: 'excel Excel导入导出', link: '/2.0/doc-server/base/excel' },
+          { text: 'ip ip能力', link: '/2.0/doc-server/base/ip' },
+          { text: 'job 定时任务', link: '/2.0/doc-server/base/job' },
+          { text: 'mybatis 持久化层配置', link: '/2.0/doc-server/base/mybatis' },
+          { text: 'redis 系统缓存', link: '/2.0/doc-server/base/redis' },
+          { text: 'security 系统安全', link: '/2.0/doc-server/base/security' },
+          { text: 'sensitive 数据脱敏', link: '/2.0/doc-server/base/sensitive' },
+          { text: 'web web配置', link: '/2.0/doc-server/base/web' },
+          { text: 'websocket 实时通信', link: '/2.0/doc-server/base/websocket' },
         ]
-      },
-      {
-        text: '接口与文档',
-        items: [{ text: 'Knife4j 文档', link: '/2.0/doc-server/doc/knife4j' }]
       },
       {
         text: '项目部署',
