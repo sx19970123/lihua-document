@@ -1,6 +1,6 @@
 # 验证码
 
-项目集成了 [天爱验证码(TAC)](https://gitee.com/dromara/tianai-captcha) 免费版，支持四种验证方式，从后台统一配置
+项目集成了 [天爱验证码(TAC)](https://gitee.com/dromara/tianai-captcha) 免费版，支持四种验证方式，从后台统一配置。
 
 ## 配置文件
 

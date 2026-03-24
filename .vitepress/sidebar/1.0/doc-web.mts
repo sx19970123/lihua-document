@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { SidebarItem } from '../types'
 
 export const sidebarDocWebV1: SidebarItem[] = [

@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { SidebarItem } from '../types'
 
 export const sidebarDocServerV2: SidebarItem[] = [
@@ -33,7 +34,7 @@ export const sidebarDocServerV2: SidebarItem[] = [
           { text: 'excel Excel导入导出', link: '/2.0/doc-server/base/excel' },
           { text: 'ip ip能力', link: '/2.0/doc-server/base/ip' },
           { text: 'job 定时任务', link: '/2.0/doc-server/base/job' },
-          { text: 'mybatis 持久化层配置', link: '/2.0/doc-server/base/mybatis' },
+          { text: 'mybatis 持久化层', link: '/2.0/doc-server/base/mybatis' },
           { text: 'redis 系统缓存', link: '/2.0/doc-server/base/redis' },
           { text: 'security 系统安全', link: '/2.0/doc-server/base/security' },
           { text: 'sensitive 数据脱敏', link: '/2.0/doc-server/base/sensitive' },
