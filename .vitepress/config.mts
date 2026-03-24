@@ -1,10 +1,17 @@
 import { defineConfig } from 'vitepress'
+// @ts-ignore
 import { sidebarOverview } from './sidebar/overview.mts'
+// @ts-ignore
 import { sidebarDocServerV1 } from './sidebar/1.0/doc-server.mts'
+// @ts-ignore
 import { sidebarDocWebV1 } from './sidebar/1.0/doc-web.mts'
+// @ts-ignore
 import { sidebarDocAppV1 } from './sidebar/1.0/doc-app.mts'
+// @ts-ignore
 import { sidebarDocServerV2 } from './sidebar/2.0/doc-server.mts'
+// @ts-ignore
 import { sidebarDocWebV2 } from './sidebar/2.0/doc-web.mts'
+// @ts-ignore
 import { sidebarDocAppV2 } from './sidebar/2.0/doc-app.mts'
 
 // https://vitepress.dev/reference/site-config
