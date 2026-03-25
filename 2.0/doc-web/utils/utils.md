@@ -98,33 +98,6 @@
   const data = decrypt(encrypt)
   ```
 
-- `const defaultPasswordEncrypt = (defaultPassword: string): string`
-
-  默认密码的前端加密，与后端定义了相同的key和vi，用于传输加密
-
-  ``` typescript
-  import {defaultPasswordEncrypt} from "@/utils/Crypto.ts";
-  const defPwd = defaultPasswordEncrypt(defaultPassword)
-  ```
-
-- `const defaultPasswordDecrypt = (encryptedPassword: string): string`
-
-  默认密码前端解密，用于回显
-
-  ``` typescript
-  import {defaultPasswordDecrypt} from "@/utils/Crypto.ts";
-  const defaultPassword = defaultPasswordEncrypt(defPwd)
-  ```
-
-- `const rasEncryptPassword = (password: string): Promise<{ciphertext:string,requestKey:string}>`
-
-  密码传输加密，传入密码返回密文和请求key，由后端进行解密
-
-  ``` typescript
-  import {rasEncryptPassword} from "@/utils/Crypto.ts";
-  const passwordEncrypt = await rasEncryptPassword(password)
-  ```
-
 ## Dict
 
 > 系统字典
@@ -195,7 +168,29 @@
   downloadFromUrl(url, fileName);
   ```
 
-  
+
+
+
+## AttachmentUrl
+
+> 公开附件下载
+
+- `export const attachmentUrl = (fullPath: string)`
+
+  根据全路径获取公开附件的下载URL。前缀在 `import.meta.env.VITE_APP_PUBLIC_ATTACHMENT_API` 中进行维护，`LOCAL` 附件模式为后台接口，`ALIYUN-OSS` 模式为阿里路径
+
+  ``` typescript
+  import {attachmentUrl, getTemporaryPath} from "@/utils/AttachmentUrl.ts";
+  const url = attachmentUrl(avatar.value)
+
+- `export const getTemporaryPath = async (url: string)`
+
+  ``` java
+  import {attachmentUrl, getTemporaryPath} from "@/utils/AttachmentUrl.ts";
+  const temporaryUrl = getTemporaryPath(url)
+  ```
+
+  将URL对应的二进制数据转为浏览器临时URL
 
 ##  HandleDate
 

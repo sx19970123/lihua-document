@@ -6,15 +6,12 @@
 lihua                                                   # 项目工程目录
 ├── docker                                             	# docker 部署目录
 │   ├── client                                          # 前端工程目录
-│   │   ├── dist                                        #前端打包后的dist目录（需自己添加）
-│   │   ├── nginx.conf                                  #nginx配置
+│   │   ├── dist                                        # 前端打包后的dist目录（需自己添加）
+│   │   ├── nginx.conf                                  # nginx配置
 │   │   ├── dockerfile                                  # 前端构建镜像dockerfile
 │   ├── server                                          # 后端服务目录
 │   │   ├── lihua-admin-exec.jar                        # 后端打包后的jar文件（需自己添加）
 │   │   ├── dockerfile                                	# 后端构建镜像dockerfile
-│   ├── xxl-job                                         # xxl-job定时任务目录（如果需要）
-│   │   ├── xxl-job-admin-2.4.2-SNAPSHOT.jar            # xxl-job打包后的jar文件（需自己添加）
-│   │   ├── dockerfile                                  # xxl-job构建镜像dockerfile
 │   ├── docker-compose.yml                              # docker编排文件
 ......        
 ```
@@ -51,15 +48,6 @@ dockerfile（构建镜像）
 server构建使用openjdk:21，将lihua-admin-exec.jar复制到指定路径下。启动之执行`java -jar` 向外抛出8080端口
 `application-prod.yml` 中关键配置读取自变量，在部署时通过`compose.yaml`对环境变量进行配置
 
-### xxl-job
-
-::: info xxl-job 为定时任务部署目录
-
-xxl-job-admin-2.4.2-SNAPSHOT.jar（xxl-job打包文件）
-
-dockerfile（构建镜像）
-
-:::
 
 与server相同，向外部抛出8081端口，如不需要可删除对应目录及`compose.yaml`中相应配置
 （系统中仅keepHeartbeat方法调用到了定时任务，用于sse定时保活）
@@ -90,12 +78,11 @@ dockerfile（构建镜像）
 - server-data：服务器文件（文件上传、文件导出、系统日志）
 - jar-resource：启动服务器时的jar包路径
 - dist-resource：前端打包dist路径
-- xxl-job-resource：启动xxl-job时的jar包路径
 
 
 
 ## 更新版本
 
 - 前端、文档更新时连接到 dist-resource、doc-dist-resource 后，替换_data下的目录即可
-- 后端、xxl-job更新时，连接到jar-resource、xxl-job-resource后，替换_data下对应的jar包，重启对应容器即可
+- 后端更新时，连接到jar-resource后，替换_data下对应的jar包，重启对应容器即可
 

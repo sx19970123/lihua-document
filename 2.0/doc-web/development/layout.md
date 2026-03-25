@@ -10,9 +10,11 @@
 lihua-vue/src/layout/  
 ├── index.vue                   # 布局主入口，根据主题类型动态加载不同布局
 ├── content/               
-│   └── index.vue               # 内容区域主组件
+│   └── index.vue               # 内容区域组件
+├── footer/                       
+│   └── index.vue               # 页脚组件
 ├── head/
-│   ├── index.vue               # 头部主组件
+│   ├── index.vue               # 头部组件
 │   └── components/  
 │       ├── breadcrumb/         # 面包屑导航
 │       ├── collapsed/          # 菜单收缩按钮
@@ -26,11 +28,11 @@ lihua-vue/src/layout/
 │   ├── SideNavigation.vue      # 侧边导航布局
 │   └── TopNavigation.vue       # 顶部导航布局
 ├── logo/                       
-│   └── index.vue               # Logo主组件
+│   └── index.vue               # Logo组件
 ├── sider/                       
-│   └── index.vue               # 侧边栏主组件
+│   └── index.vue               # 侧边栏组件
 └── view-tabs/                   
-    ├── index.vue               # 标签页主组件
+    ├── index.vue               # 标签页组件
     └── components/
     		├── TabPaneMenu.vue	# 标签页元素及右键菜单
         └── TabRightMenu.vue    # 标签页右键菜单

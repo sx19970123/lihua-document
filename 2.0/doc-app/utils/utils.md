@@ -25,11 +25,20 @@ const { md5, fileName, filePath, size } = await getFileInfo(url)
 ```
 ### 获取附件临时地址
 
-在消息通知中使用，根据网络图片拿到临时地址，显示到通知中
+在消息通知中使用，根据网络图片拿到临时地址
 
 ``` typescript
 import {getFileTempPath} from '@/utils/attachment/AttachmentUtils'
-const tempURL = await getFileInfo(url)
+const tempURL = await getFileTempPath(url)
+```
+
+### 公开附件下载
+
+根据全路径获取公开附件的下载URL。前缀在 `import.meta.env.VITE_APP_PUBLIC_ATTACHMENT_API` 中进行维护，`LOCAL` 附件模式为后台接口，`ALIYUN-OSS` 模式为阿里路径
+
+``` typescript
+import {attachmentUrl} from '@/utils/attachment/AttachmentUtils'
+const url = attachmentUrl(fullPath)
 ```
 
 

@@ -17,7 +17,7 @@ hero:
       text: 进入 1.0 文档
       link: /1.0/doc-server/basic/overview
     - theme: brand
-      text: 进入 2.0 文档（正在施工...）
+      text: 进入 2.0 文档
       link: /2.0/doc-server/basic/overview
 
 
