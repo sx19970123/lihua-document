@@ -136,14 +136,26 @@ export default defineConfig({
           updateNavLinks()
         }
 
-        bootstrap()
-        window.addEventListener('DOMContentLoaded', bootstrap)
-        window.addEventListener('popstate', bootstrap)
+        function scheduleBootstrap() {
+          bootstrap()
+          // VitePress hydration may re-render nav after initial script run.
+          setTimeout(bootstrap, 50)
+          setTimeout(bootstrap, 250)
+          setTimeout(bootstrap, 800)
+        }
+
+        scheduleBootstrap()
+        window.addEventListener('DOMContentLoaded', scheduleBootstrap)
+        window.addEventListener('load', scheduleBootstrap)
+        window.addEventListener('popstate', scheduleBootstrap)
+        window.addEventListener('vitepress:route-change', function() {
+          setTimeout(scheduleBootstrap, 0)
+        })
         document.addEventListener('click', function(e) {
           const target = e.target && e.target.closest ? e.target.closest('a') : null
           if (!target) return
           if (target.origin === location.origin) {
-            setTimeout(bootstrap, 0)
+            setTimeout(scheduleBootstrap, 0)
           }
         })
       })()
