@@ -2,7 +2,7 @@
 
 ## 前期准备
 
-- 开发环境：[node 20+](https://nodejs.cn/download/)
+- 开发环境：[node 22.12+](https://nodejs.cn/download/)
 - 开发工具：[WebStorm](https://www.jetbrains.com.cn/webstorm/)
 
 ## 拉取项目代码
