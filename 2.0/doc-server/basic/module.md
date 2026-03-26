@@ -33,7 +33,7 @@
 
    ![image-20241019135001625](./module.assets/image-20241019135001625.png)
 
-7. 默认没有携带 `token` 的请求会被 `SpringSecurity` 拦截，可在 `lihua-biz` - `lihua-security` - `com/lihua/security/config/SecurityConfig.java` 下新增临时白名单
+7. 默认没有携带 `token` 的请求会被 `SpringSecurity` 拦截，可在 `lihua-base` - `lihua-security` - `com/lihua/security/config/SecurityConfig.java` 下新增临时白名单
 
    ![image-20260320161829701](./module.assets/image-20260320161829701.png)
 
