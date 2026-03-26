@@ -34,6 +34,7 @@ export const sidebarDocServerV2: SidebarItem[] = [
           { text: 'excel 导入导出', link: '/2.0/doc-server/base/excel' },
           { text: 'ip 地址相关', link: '/2.0/doc-server/base/ip' },
           { text: 'job 定时任务', link: '/2.0/doc-server/base/job' },
+          { text: 'log 系统日志', link: '/2.0/doc-server/base/log' },
           { text: 'mybatis 持久化层', link: '/2.0/doc-server/base/mybatis' },
           { text: 'redis 系统缓存', link: '/2.0/doc-server/base/redis' },
           { text: 'security 系统安全', link: '/2.0/doc-server/base/security' },

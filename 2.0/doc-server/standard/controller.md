@@ -169,4 +169,4 @@ public enum ResultCodeEnum {
 
 ## 请求日志
 
-项目中提供了 `@Log` 注解进行日志记录，详细用法参考 [注解](/2.0/doc-server/component/annotation.html#日志记录)
+项目中提供了 `@Log` 注解进行日志记录，详细用法参考 [系统日志](/2.0/doc-server/base/log)
