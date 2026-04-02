@@ -264,12 +264,25 @@ LocalCacheManager.getCache(key, clazz);
 LocalCacheManager.getWithFallback(key, clazz, BiFunction<String, Class<T>, T>);
 ```
 
+**缓存对象**
+
+> REDIS_CACHE_MANAGER 获取缓存参数、返回值与 getWithFallback 相同时，可简写为lambda表达式。
+
 ``` java
 // 获取当前登录用户上下文信息，优先获取本地缓存，本地缓存不存在再从redis获取
 LoginUser loginUser = LOCAL_CACHE_MANAGER.getWithFallback(decode, LoginUser.class, REDIS_CACHE_MANAGER::getCacheObject);
 ```
 
-- 参数：key - 缓存key，clazz - 缓存对象class，BiFunction\<String, Class\<T\>, T\> - 本地缓存失效后分布式缓存获取逻辑
+**缓存集合**
+
+> 对于List等缓存，需要调用getWithFallback的重载方法，参数二传入 `new TypeReference<>(){}` ，fallback 参数需要自行传入。
+
+``` java
+// 获取字典数据，优先获取本地缓存，本地缓存不存在再从redis获取
+List<DictDataModel> dictCache = LOCAL_CACHE_MANAGER.getWithFallback(cacheKey, new TypeReference<>(){}, () -> REDIS_CACHE_MANAGER.getCacheList(cacheKey, DictDataModel.class));
+```
+
+- 参数：key - 缓存key，clazz ｜ TypeReference - 缓存对象类型 ，fallback - 本地缓存失效后调用Redis的方法，在 `getWithFallback` 中延迟调用，并为本地缓存赋值
 - 返回值：缓存对象clazz对象数据
 - 说明：优先获取本地缓存数据，本地缓存不存在，通过 fallback 获取数据，获取到后再回填到本地缓存。fallback 一般为RedisCacheManager 获取数据方式，返回类型需与范型相同。
 
