@@ -27,6 +27,7 @@ export const sidebarDocServerV2: SidebarItem[] = [
         text: 'base 基础能力层',
         items: [
           { text: 'attachment 附件', link: '/2.0/doc-server/base/attachment' },
+          { text: 'cache 系统缓存', link: '/2.0/doc-server/base/cache' },
           { text: 'captcha 验证码', link: '/2.0/doc-server/base/captcha' },
           { text: 'common 公共模块', link: '/2.0/doc-server/base/common' },
           { text: 'dict 字典', link: '/2.0/doc-server/base/dict' },
@@ -36,7 +37,6 @@ export const sidebarDocServerV2: SidebarItem[] = [
           { text: 'job 定时任务', link: '/2.0/doc-server/base/job' },
           { text: 'log 系统日志', link: '/2.0/doc-server/base/log' },
           { text: 'mybatis 持久化层', link: '/2.0/doc-server/base/mybatis' },
-          { text: 'redis 系统缓存', link: '/2.0/doc-server/base/redis' },
           { text: 'security 系统安全', link: '/2.0/doc-server/base/security' },
           { text: 'sensitive 数据脱敏', link: '/2.0/doc-server/base/sensitive' },
           { text: 'web 配置', link: '/2.0/doc-server/base/web' },

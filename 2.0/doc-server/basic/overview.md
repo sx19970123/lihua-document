@@ -68,6 +68,7 @@ lihua/
 ├── lihua-base/                         # 基础能力模块
 │   ├── pom.xml
 │   ├── lihua-attachment/               # 附件模块
+│   ├── lihua-cache/                    # 系统缓存模块
 │   ├── lihua-captcha/                  # 验证码模块
 │   ├── lihua-common/                   # 公共模块
 │   ├── lihua-dict/                     # 字典模块
@@ -77,7 +78,6 @@ lihua/
 │   ├── lihua-job/                      # 定时任务模块
 │   ├── lihua-log/                      # 日志模块
 │   ├── lihua-mybatis/                  # mybatis持久层框架模块
-│   ├── lihua-redis/                    # redis缓存模块
 │   ├── lihua-security/                 # 安全模块
 │   ├── lihua-sensitive/                # 脱敏模块
 │   ├── lihua-web/                      # web模块

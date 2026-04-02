@@ -1,6 +1,6 @@
-# Redis
+# Cache
 
-系统Redis客户端为 `redisson` ，提供了基础的Redis操作。
+系统Redis客户端为 `redisson` ，提供了基础的Redis操作，`2.0.2` 版本新增基于`caffeine` 的本地缓存。
 
 
 
@@ -25,12 +25,12 @@ spring:
           # 最小空闲连接数
           connectionMinimumIdleSize: 10
         # 自定义序列化器
-        codec: !<com.lihua.redis.config.TypedRedissonJsonCodec> {}
+        codec: !<com.lihua.cache.config.TypedRedissonJsonCodec> {}
 ```
 
 其中 codec 指向了 `TypedRedissonJsonCodec` 自定义序列化器，`TypedRedissonJsonCodec` 在IDEA中显示灰色（没有被调用）但不可删除！
 
-## 缓存
+## Redis缓存
 
 ### setCacheObject
 
@@ -232,11 +232,76 @@ String memory = redisCache.memoryInfo();
 - 返回值：String 内存占用（MB）
 - 说明：获取Redis当前内存使用情况（单位MB）
 
-## 统一前缀
+
+
+## 本地缓存 <Badge type="warning" text="2.0.2" />
+
+本地缓存定位为项目一级缓存，redis为二级缓存，查询缓存时使用 `getWithFallback` 方法。在 `RedisKeyPrefixEnum` 枚举中可配置本地缓存失效时间。主动失效调用 `RedisPublisher` 发布本地缓存失效消息。
+
+### setCache
+
+```java
+LocalCacheManager.setCache(key, value);
+```
+
+- 参数：key - 缓存key，value - 缓存对象
+- 返回值：无
+- 说明：缓存单个对象数据到caffeine（默认10s过期，TTL机制在 `LocalCacheConfig` 配置）
+
+### getCache
+
+```java
+LocalCacheManager.getCache(key, clazz);
+```
+
+- 参数：key - 缓存key，clazz - 缓存对象class
+- 返回值：缓存对象clazz对象数据
+- 说明：根据key返回指定类型的对象数据
+
+### getWithFallback
+
+```java
+LocalCacheManager.getWithFallback(key, clazz, BiFunction<String, Class<T>, T>);
+```
+
+``` java
+// 获取当前登录用户上下文信息，优先获取本地缓存，本地缓存不存在再从redis获取
+LoginUser loginUser = LOCAL_CACHE_MANAGER.getWithFallback(decode, LoginUser.class, REDIS_CACHE_MANAGER::getCacheObject);
+```
+
+- 参数：key - 缓存key，clazz - 缓存对象class，BiFunction\<String, Class\<T\>, T\> - 本地缓存失效后分布式缓存获取逻辑
+- 返回值：缓存对象clazz对象数据
+- 说明：优先获取本地缓存数据，本地缓存不存在，通过 fallback 获取数据，获取到后再回填到本地缓存。fallback 一般为RedisCacheManager 获取数据方式，返回类型需与范型相同。
+
+### remove
+
+```java
+LocalCacheManager.remove(key);
+```
+
+- 参数：key - 缓存key
+- 返回值：无
+- 说明：删除本地缓存。一般由 LocalCacheInvalidateSubscriber 收到广播消息后调用
+
+### 使本地缓存失效
+
+为保证多实例部署下，所有实例缓存可同时主动失效，使用redis 的发布订阅模式进行通知。可使用 `RedisPublisher` 中 `send` 方法发送topic为`INVALIDATE_LOCAL_CACHE`（`RedisTopicEnum` 下维护）的消息，msg 为对应redis 的 key，发送后所有实例的`LocalCacheInvalidateSubscriber` 均会收到消息，执行删除本地缓存。
+
+``` java
+// 发送缓存失效广播
+REDIS_PUBLISHER.send(RedisTopicEnum.INVALIDATE_LOCAL_CACHE.getValue(), cacheKey);
+```
+
+
+
+## 统一前缀 <Badge type="warning" text="2.0.2" />
 
 `RedisKeyPrefixEnum` 枚举中定义的Redis的统一前缀，在此维护的Key可自动被 `系统监控` `缓存监控` 识别。
 
+`localTTL`  为本地缓存失效时间，当某个RedisKey启用了一级本地缓存，可在此处配置一级缓存过期时间。（null 为 10s）
+
 ``` java
+
 /**
  * Redis-Key前缀枚举
  * 在此枚举中维护的前缀可通过「系统监控」-「缓存监控」进行具体类型的维护
@@ -246,33 +311,47 @@ String memory = redisCache.memoryInfo();
 @AllArgsConstructor
 public enum RedisKeyPrefixEnum {
 
-    LOGIN_USER_REDIS_PREFIX("REDIS_CACHE_LOGIN_USER:", "登录用户"),
+    LOGIN_USER_REDIS_PREFIX("REDIS_CACHE_LOGIN_USER:", "登录用户", 10L),
 
-    DICT_DATA_REDIS_PREFIX("REDIS_CACHE_DICT_DATA:", "系统字典"),
+    DICT_DATA_REDIS_PREFIX("REDIS_CACHE_DICT_DATA:", "系统字典", null),
 
-    SYSTEM_SETTING_REDIS_PREFIX("REDIS_CACHE_SYSTEM_SETTING:", "系统设置"),
+    SYSTEM_SETTING_REDIS_PREFIX("REDIS_CACHE_SYSTEM_SETTING:", "系统设置", null),
 
-    SYSTEM_IP_BLACKLIST_REDIS_PREFIX("REDIS_CACHE_IP_BLACKLIST:", "IP黑名单"),
+    SYSTEM_IP_BLACKLIST_REDIS_PREFIX("REDIS_CACHE_IP_BLACKLIST:", "IP黑名单", null),
 
-    PREVENT_DUPLICATE_SUBMIT_REDIS_PREFIX("REDIS_CACHE_REQUEST_SUBMIT:", "防重复提交"),
+    PREVENT_DUPLICATE_SUBMIT_REDIS_PREFIX("REDIS_CACHE_REQUEST_SUBMIT:", "防重复提交", null),
 
-    CAPTCHA_TYPE_VALUE_REDIS_PREFIX("captcha:config:", "验证码缓存"),
+    CAPTCHA_TYPE_VALUE_REDIS_PREFIX("captcha:config:", "验证码缓存", null),
 
-    CAPTCHA_REDIS_PREFIX("REDIS_CACHE_CAPTCHA:", "验证码验证中"),
+    CAPTCHA_REDIS_PREFIX("REDIS_CACHE_CAPTCHA:", "验证码验证中", null),
 
-    SECONDARY_CAPTCHA_REDIS_PREFIX("REDIS_CACHE_SECONDARY_CAPTCHA:", "验证码二次验证"),
+    SECONDARY_CAPTCHA_REDIS_PREFIX("REDIS_CACHE_SECONDARY_CAPTCHA:", "验证码二次验证", null),
 
-    CHUNK_UPLOAD_ID_REDIS_PREFIX("REDIS_CACHE_CHUNK_UPLOAD_ID:", "分片上传uploadId"),
+    CHUNK_UPLOAD_ID_REDIS_PREFIX("REDIS_CACHE_CHUNK_UPLOAD_ID:", "分片上传uploadId", null),
 
-    CHECK_PASSWORD_REDIS_PREFIX("REDIS_CACHE_CHECK_PASSWORD:", "检测密码"),
+    CHECK_PASSWORD_REDIS_PREFIX("REDIS_CACHE_CHECK_PASSWORD:", "检测密码", null),
 
-    ONCE_TOKEN_REDIS_PREFIX("REDIS_CACHE_ONCE_TOKEN:", "一次性令牌"),
+    ONCE_TOKEN_REDIS_PREFIX("REDIS_CACHE_ONCE_TOKEN:", "一次性令牌", null),
 
-    // 业务需要，非真实 redis key
-    OTHER("OTHER", "其他");
+    // 业务需要，非真实 manager key
+    OTHER("OTHER", "其他", null);
 
+    /**
+     * 缓存前缀
+     */
     private final String value;
+
+    /**
+     * 缓存标签，供页面显示缓存信息
+     */
     private final String label;
+
+    /**
+     * 本地缓存时长（秒）
+     * null 为不设置本地缓存
+     * 不设置本地缓存的key应用了二级缓存，默认10s ttl
+     */
+    private final Long localTTL;
 
     /**
      * 获取全部枚举
@@ -280,6 +359,28 @@ public enum RedisKeyPrefixEnum {
     public static List<RedisKeyPrefixEnum> getRedisKeyPrefix() {
         return new ArrayList<>(Arrays.asList(values()));
     }
+}
+```
+
+
+
+## 广播主题 <Badge type="warning" text="2.0.2" />
+
+Redis pub/sub 模式下 `topic` 维护。
+
+``` java
+/**
+ * redis 发布订阅模式topic
+ */
+@Getter
+@AllArgsConstructor
+public enum RedisTopicEnum {
+    /**
+     * 清除本地缓存
+     */
+    INVALIDATE_LOCAL_CACHE("invalidate_local_cache");
+
+    private final String value;
 }
 ```
 
