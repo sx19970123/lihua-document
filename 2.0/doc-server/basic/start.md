@@ -4,8 +4,8 @@
 
 ## 环境准备
 
-- Java版本：21｜25
-- MySQL版本：8.0+
+- Java：21｜25
+- MySQL：8.0+
 - Redis：3.0+
 - Maven：3.0+
 
@@ -13,7 +13,7 @@
 
 ## 开发工具
 
-- IDEA
+- IDEA：2025+
 - Navicat
 
 
