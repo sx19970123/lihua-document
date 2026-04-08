@@ -2,16 +2,16 @@
 
 ## 文件结构
 ```
-lihua                 	                                // 项目工程目录
-├── docker                		                // docker 部署目录
-│   ├── client                                          // 前端工程目录
-│   │   ├── dist	                                // 前端打包后的dist目录（需自己添加）
-│   │   ├── nginx.conf	                                // nginx配置
-│   │   ├── dockerfile	                                // 前端构建镜像dockerfile
-│   ├── server                                          // 后端服务目录
-│   │   ├── lihua-admin-exec.jar	                // 后端打包后的jar文件（需自己添加）
-│   │   ├── dockerfile	             		        // 后端构建镜像dockerfile
-│   ├── docker-compose.yml                              // docker编排文件
+lihua                 	                                # 项目工程目录
+├── docker                		                        # docker 部署目录
+│   ├── client                                          # 前端工程目录
+│   │   ├── dist	                                    # 前端打包后的dist目录（需自己添加）
+│   │   ├── nginx.conf	                                # nginx配置
+│   │   ├── dockerfile	                                # 前端构建镜像dockerfile
+│   ├── server                                          # 后端服务目录
+│   │   ├── lihua-admin-exec.jar	                    # 后端打包后的jar文件（需自己添加）
+│   │   ├── dockerfile	             		            # 后端构建镜像dockerfile
+│   ├── docker-compose.yml                              # docker编排文件
 ......        
 ```
 ## 部署说明
