@@ -1,4 +1,5 @@
 # 使用Docker部署应用程序
+> docker默认配置在项目`lihua`-`docker`目录下
 
 ## 文件结构
 ```
