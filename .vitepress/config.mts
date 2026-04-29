@@ -62,6 +62,11 @@ export default defineConfig({
         color: var(--vp-c-text-1) !important;
       }
 
+      html.is-backend-route-doc .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"] .button,
+      html.is-backend-route-doc .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"] .button .text {
+        color: var(--vp-c-brand-1) !important;
+      }
+
     `],
     ['script', {}, `
       (function() {
@@ -96,12 +101,17 @@ export default defineConfig({
           return /^\\/(1\\.0|2\\.0)\\/(doc-server|doc-microservice|doc-web|doc-app)\\//.test(pathname)
         }
 
+        function isBackendRouteDocPath(pathname) {
+          return /^\\/2\\.0\\/(doc-server|doc-microservice)\\//.test(pathname)
+        }
+
         function updateHiddenNavClass() {
           document.documentElement.classList.toggle('is-platform-nav-hidden', shouldHidePlatformNav(location.pathname))
         }
 
         function updateVersionClass() {
           document.documentElement.classList.toggle('is-doc-version-2', isVersionedDocPath(location.pathname) && getCurrentVersion() === '2.0')
+          document.documentElement.classList.toggle('is-backend-route-doc', isBackendRouteDocPath(location.pathname))
         }
 
         function updateNavLinks() {
