@@ -1,4 +1,5 @@
 # Lihua App
+**SpringBoot单体版 与 SpringCloud微服务版 可共用App端**
 
 基于「狸花猫后台管理系统」的业务扩展方案，使用 **uni-app** 开发，适配 **App 与微信小程序**，并与 Web 端能力保持一致。
 

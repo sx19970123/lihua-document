@@ -8,13 +8,15 @@
 
 ## 拉取项目代码
 
-1. 前往仓库下载master分支代码 [仓库](https://gitee.com/yukino_git/lihua-app)
+::: warning 提示
+**2.1 版本开始 `lihua-app` 跟随 `lihua`/`lihua-cloud` 在主工程根目录下**
+:::
 
-   ![image-20251216132805953](./start.assets/image-20251216132805953.png)
+1. app项目与后端在同一工程下参考后端[拉取项目代码](/2.0/doc-server/basic/start#拉取项目代码)，app代码在工程根目录下`lihua-app`中
 
-   ![image-20251216132901082](./start.assets/image-20251216132901082.png)
+   ![image-20260429205653480](./start.assets/image-20260429205653480.png)
 
-2. 使用 `HbuilderX` 导入项目刚才下载解压好的项目源码
+2. 使用 `HbuilderX` 导入`lihua-app`项目源码
 
    ![image-20251216133037773](./start.assets/image-20251216133037773.png)
 

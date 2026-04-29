@@ -1,4 +1,6 @@
 # Lihua Vue
+**SpringBoot单体版 与 SpringCloud微服务版 可共用Web端**
+
 
 狸花猫后台管理系统，基于Vue3 TypeScript开发
 

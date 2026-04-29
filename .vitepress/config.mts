@@ -39,15 +39,26 @@ export default defineConfig({
     ['style', {}, `
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-microservice/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-web/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-web/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-app/"],
-      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-app/"] {
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-app/"],
+      .is-platform-nav-hidden .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"] {
+        display: none !important;
+      }
+
+      html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-microservice/"],
+      html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
+      html:not(.is-doc-version-2) .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"],
+      html.is-doc-version-2 .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"] {
         display: none !important;
       }
 
       .VPNavBarMenu .VPFlyout .button[data-version-menu="true"],
-      .VPNavBarMenu .VPFlyout .button[data-version-menu="true"] .text {
+      .VPNavBarMenu .VPFlyout .button[data-version-menu="true"] .text,
+      .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"] .button,
+      .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"] .button .text {
         color: var(--vp-c-text-1) !important;
       }
 
@@ -81,20 +92,27 @@ export default defineConfig({
           return normalized === '/' || normalized === '/index' || normalized === '/index.html' || normalized === '/home/overview' || normalized === '/home/overview.html'
         }
 
+        function isVersionedDocPath(pathname) {
+          return /^\\/(1\\.0|2\\.0)\\/(doc-server|doc-microservice|doc-web|doc-app)\\//.test(pathname)
+        }
+
         function updateHiddenNavClass() {
           document.documentElement.classList.toggle('is-platform-nav-hidden', shouldHidePlatformNav(location.pathname))
+        }
+
+        function updateVersionClass() {
+          document.documentElement.classList.toggle('is-doc-version-2', isVersionedDocPath(location.pathname) && getCurrentVersion() === '2.0')
         }
 
         function updateNavLinks() {
           const version = getCurrentVersion()
 
-          const serverPath = '/' + version + '/doc-server/basic/overview'
           const webPath = '/' + version + '/doc-web/basic/overview'
           const appPath = '/' + version + '/doc-app/basic/overview'
 
           document.querySelectorAll('.VPNavBarMenu .VPNavBarMenuLink').forEach((el) => {
             const text = (el.textContent || '').trim()
-            if (text === '后端') el.setAttribute('href', serverPath)
+            if (text === '后端') el.setAttribute('href', '/1.0/doc-server/basic/overview')
             if (text === '前端') el.setAttribute('href', webPath)
             if (text === '移动端') el.setAttribute('href', appPath)
           })
@@ -128,11 +146,27 @@ export default defineConfig({
           })
         }
 
+        function markBackendRouteFlyout() {
+          document.querySelectorAll('.VPNavBarMenu .VPFlyout').forEach((flyout) => {
+            const text = (flyout.textContent || '').trim()
+            if (text.includes('Spring Boot') && text.includes('Spring Cloud')) {
+              flyout.setAttribute('data-backend-route-menu', 'true')
+              const label = location.pathname.startsWith('/2.0/doc-microservice/') ? 'Cloud' : 'Boot'
+              const textEl = flyout.querySelector('.button .text')
+              if (textEl) {
+                textEl.textContent = label
+              }
+            }
+          })
+        }
+
         function bootstrap() {
           const detected = getVersionFromPath(location.pathname)
           if (detected) setCurrentVersion(detected)
           updateHiddenNavClass()
+          updateVersionClass()
           markVersionFlyout()
+          markBackendRouteFlyout()
           updateNavLinks()
         }
 
@@ -177,10 +211,18 @@ export default defineConfig({
         text: '版本',
         items: [
           { text: 'v1.0', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/(doc-server|doc-web|doc-app)/' },
-          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-web|doc-app)/' }
+          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-microservice|doc-web|doc-app)/' }
         ]
       },
-      { text: '后端', link: '/1.0/doc-server/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-server/' },
+      { text: '后端', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/doc-server/' },
+      {
+        text: '后端',
+        activeMatch: '^/2\\.0/(doc-server|doc-microservice)/',
+        items: [
+          { text: 'Spring Boot', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/doc-server/' },
+          { text: 'Spring Cloud', link: '/2.0/doc-microservice/basic/overview', activeMatch: '^/2\\.0/doc-microservice/' }
+        ]
+      },
       { text: '前端', link: '/1.0/doc-web/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-web/' },
       { text: '移动端', link: '/1.0/doc-app/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-app/' }
     ],

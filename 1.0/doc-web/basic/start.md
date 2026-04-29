@@ -7,7 +7,7 @@
 
 ## 拉取项目代码
 
-1. 前端项目与后端在同一工程下参考后端[拉取项目代码](/doc-server/basic/start.html#拉取项目代码)，前端代码在`lihua/lihua-vue `中
+1. 前端项目与后端在同一工程下参考后端[拉取项目代码](/1.0/doc-server/basic/start.html#拉取项目代码)，前端代码在`lihua/lihua-vue`中
 
 2. 使用WebStorm打开项目中的 `lihua-vue` 工程
 

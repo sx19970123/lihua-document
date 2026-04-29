@@ -7,7 +7,9 @@
 
 ## 拉取项目代码
 
-1. 前端项目与后端在同一工程下参考后端[拉取项目代码](/doc-server/basic/start.html#拉取项目代码)，前端代码在`lihua/lihua-vue `中
+1. 前端项目与后端在同一工程下参考后端[拉取项目代码](/2.0/doc-server/basic/start#拉取项目代码)，前端代码在工程根目录下`lihua-vue`中
+
+   ![image-20260429205928697](./start.assets/image-20260429205928697.png)
 
 2. 使用WebStorm打开项目中的 `lihua-vue` 工程
 
@@ -34,6 +36,13 @@
 1. 修改配置文件，找到项目中 `vite.config.ts` 文件，修改 `server` 下 `port` 和 `proxy（重点）`
 
    ![image-20241018230612605](./start.assets/image-20241018230612605.png)
+
+
+**对应后端配置**
+
+单体版配置在 `lihua-admin/src/main/resources/application.yml` 下
+
+微服务版配置在 `lihua-gateway/src/main/resources/application-dev.yml` 下
 
 ## 启动项目
 
