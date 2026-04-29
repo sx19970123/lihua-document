@@ -3,7 +3,7 @@ import type { SidebarItem } from '../types'
 
 export const sidebarDocCloudV2: SidebarItem[] = [
   {
-    text: 'SpringCloud 微服务文档',
+    text: 'SpringCloud 后端文档',
     items: [
       {
         text: '基础',

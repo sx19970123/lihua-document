@@ -4,10 +4,11 @@
 
 ## 环境准备
 
-- Java：21｜25
+- Java：21+
 - MySQL：8.0+
 - Redis：3.0+
 - Maven：3.0+
+- Nacos：3.1+
 
 
 
@@ -20,13 +21,17 @@
 
 ## 拉取项目代码
 
-1. 前往仓库下载master分支代码 [仓库](https://gitee.com/yukino_git/lihua)
+1. 前往仓库下载master分支代码 [仓库](https://gitee.com/yukino_git/lihua-cloud)
 
-   ![image-20241018210043327](./start.assets/image-20241018210043327.png)
+   ![image-20260429215939134](./start.assets/image-20260429215939134.png)
 
-2. 使用IDEA打开项目
+2. 下载后项目包含 web端、App端、服务端。使用 idea 打开后端服务
 
-   ![image-20241018210444101](./start.assets/image-20241018210444101-1765891044119-1.png)
+   ![image-20260429220200283](./start.assets/image-20260429220200283.png)
+
+3. 使用IDEA打开 `lihua-cloud`
+
+   ![image-20260429220551809](./start.assets/image-20260429220551809.png)
 
    
 
@@ -40,54 +45,92 @@
 
 2. 导入SQL文件
 
-   新建数据库后鼠标在新建的数据库上右键点击 “运行SQL文件” ，选择项目 `sql/lihua.sql` 文件后点击开始
+   新建数据库后鼠标在新建的数据库上右键点击 “运行SQL文件” ，选择项目 `lihua-cloud/res/db/lihua.sql` 文件后点击开始
 
-   ![image-20241018211216784](./start.assets/image-20241018211216784-1765891160459-5.png)
+   ![image-20260429221214424](./start.assets/image-20260429221214424.png)
 
 
 
-## 基础配置
+## 项目配置
+
+### Nacos
+
+1. 启动Nacos
+
+   **默认已集成Docker环境** 终端运行下面docker命令
+
+   ```
+   docker run --name nacos-standalone-derby \
+     -e MODE=standalone \
+     -e NACOS_AUTH_ENABLE=true \
+     -e NACOS_AUTH_TOKEN=QmVsb25nUmFuZG9tU2VjdXJlVG9rZW5TdHJpbmcxMjM0 \
+     -e NACOS_AUTH_IDENTITY_KEY=nacos \
+     -e NACOS_AUTH_IDENTITY_VALUE=nacos \
+     -p 8080:8080 \
+     -p 8848:8848 \
+     -p 9848:9848 \
+     -d nacos/nacos-server:latest
+   ```
+
+   ![image-20260429223459845](./start.assets/image-20260429223459845.png)
+
+   
+
+   ![image-20260429223633781](./start.assets/image-20260429223633781.png)
+
+2. 创建命名空间，登录进系统后创建命名空间 **命名空间ID也需要设置为dev** 
+
+   ![image-20260429224053627](./start.assets/image-20260429224053627.png)
+
+3. 导入配置，工程根路径 `lihua-cloud/res/nacos` 下 `nacos_config.zip` 导入到nacos
+
+   ![image-20260429224232681](./start.assets/image-20260429224232681.png)
+
+   ![image-20260429224548695](./start.assets/image-20260429224548695.png)
+
+
 
 ### 配置文件
 
-`lihua-admin` 子工程下 `src/main/resources` 下`.yml` 为项目的配置文件
+1. 配置总揽，项目下有 `5` 个可启动服务，每个服务都包含 `application.yml` `application-dev.yml` `application-prod.yml` 三个配置文件
 
-- `application.yml` 开发、生产环境公共配置
+   ![image-20260429224832254](./start.assets/image-20260429224832254.png)
 
-- `application-dev.yml`  开发环境配置
+   - **application.yml**：通用配置，项目中固定不变的配置
+   - **application-dev.yml**：开发配置，端口号及Nacos地址等配置，其余配置由 `Nacos` 管理
+   - **application-prod.yml**：生产配置，端口号及Nacos地址等配置，默认使用环境变量占位
 
-- `application-prod.yml` 生产环境配置
+2. 本地配置nacos，nacos服务发现、配置中心在 `application-dev.yml` 和 `application-prod.yml` 中，由 `application.yml` 指定
 
-  ![image-20250221062225153](./start.assets/image-20250221062225153.png)
+   ![image-20260429225600038](./start.assets/image-20260429225600038.png)
 
+3. 微服务配置规范为
 
+   - 配置文件名称：$\{serverName\}.yaml
 
-### 配置项
-
-**application.yml**
-
-- 运行端口： `server.port` 可配置项目运行端口，默认8080
-
-**application-dev.yml**
-
-- 附件路径：`attachment.uploadFilePath` 配置附件上传路径
-- 数据库连接：`spring.datasource.dynamic.datasource.master` 下配置 `url` `username` `password`
-- Redis连接：`spring.redis.redisson.config` 下配置 `address` `password`
-- 日志路径：`logging.file.name` 配置日志保存路径
-
-
+   - 分组：$\{serverName\}
 
 ## 启动项目
 
-> 需确保Mysql、Redis启动中并连接正常
+> 需确保Mysql、Redis、Nacos启动中并连接正常
 
-1. `lihua-admin` 子项目下找到 `com/lihua/LiHuaApplication.java` 启动类，点击IDEA启动按钮，控制台打印 `/START SUCCESS/` 即表示启动成功
+1. IDEA 可识别到微服务中各个服务，可右键一键启动。
 
-   ![image-20241018212918030](./start.assets/image-20241018212918030.png)
+   ![image-20260429230406110](./start.assets/image-20260429230406110.png)
 
-2. 浏览器输入 `localhost:端口号`  显示返回结果即启动成功
+   ![image-20260429232022922](./start.assets/image-20260429232022922.png)
 
-   ![image-20241018213005981](./start.assets/image-20241018213005981.png)
+   
+
+2. 浏览器输入 `http://localhost:8085/system/auth/onceToken`  返回 401 表示接口调用成功
+
+   ![image-20260429232411404](./start.assets/image-20260429232411404.png)
+   
+   
+   
+   nacos服务列表可以看到对应服务
+   
+   ![image-20260429232117214](./start.assets/image-20260429232117214.png)
 
 
 

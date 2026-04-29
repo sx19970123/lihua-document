@@ -163,7 +163,11 @@ export default defineConfig({
             const text = (flyout.textContent || '').trim()
             if (text.includes('Spring Boot') && text.includes('Spring Cloud')) {
               flyout.setAttribute('data-backend-route-menu', 'true')
-              const label = location.pathname.startsWith('/2.0/doc-cloud/') ? 'Cloud' : 'Boot'
+              const label = location.pathname.startsWith('/2.0/doc-cloud/')
+                ? 'Cloud'
+                : location.pathname.startsWith('/2.0/doc-server/')
+                  ? 'Boot'
+                  : '后端'
               const textEl = flyout.querySelector('.button .text')
               if (textEl) {
                 textEl.textContent = label

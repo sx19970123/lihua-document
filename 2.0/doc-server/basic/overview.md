@@ -82,14 +82,11 @@ lihua/
 │   ├── lihua-sensitive/                # 脱敏模块
 │   ├── lihua-web/                      # web模块
 │   └── lihua-websocket/                # websocket通信模块
-├── lihua-biz/                          # 业务模块
-│   ├── pom.xml
-│   ├── lihua-monitor/                  # 系统监控
-│   └── lihua-system/                   # 系统业务
-├── lihua-vue/                          # web端vue项目
-├── docker/                             # docker快速部署
-├── sql/                                # sql脚本
-└── static-image/                       # 静态图片
+└── lihua-biz/                          # 业务模块
+    ├── pom.xml
+    ├── lihua-monitor/                  # 系统监控
+    └── lihua-system/                   # 系统业务
+
 ```
 
 
