@@ -10,6 +10,8 @@ import { sidebarDocAppV1 } from './sidebar/1.0/doc-app.mts'
 // @ts-ignore
 import { sidebarDocServerV2 } from './sidebar/2.0/doc-server.mts'
 // @ts-ignore
+import { sidebarDocCloudV2 } from './sidebar/2.0/doc-cloud.mts'
+// @ts-ignore
 import { sidebarDocWebV2 } from './sidebar/2.0/doc-web.mts'
 // @ts-ignore
 import { sidebarDocAppV2 } from './sidebar/2.0/doc-app.mts'
@@ -39,7 +41,7 @@ export default defineConfig({
     ['style', {}, `
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
-      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-microservice/"],
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-cloud/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-web/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-web/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-app/"],
@@ -48,7 +50,7 @@ export default defineConfig({
         display: none !important;
       }
 
-      html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-microservice/"],
+      html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-cloud/"],
       html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
       html:not(.is-doc-version-2) .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"],
       html.is-doc-version-2 .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"] {
@@ -98,11 +100,11 @@ export default defineConfig({
         }
 
         function isVersionedDocPath(pathname) {
-          return /^\\/(1\\.0|2\\.0)\\/(doc-server|doc-microservice|doc-web|doc-app)\\//.test(pathname)
+          return /^\\/(1\\.0|2\\.0)\\/(doc-server|doc-cloud|doc-web|doc-app)\\//.test(pathname)
         }
 
         function isBackendRouteDocPath(pathname) {
-          return /^\\/2\\.0\\/(doc-server|doc-microservice)\\//.test(pathname)
+          return /^\\/2\\.0\\/(doc-server|doc-cloud)\\//.test(pathname)
         }
 
         function updateHiddenNavClass() {
@@ -161,7 +163,7 @@ export default defineConfig({
             const text = (flyout.textContent || '').trim()
             if (text.includes('Spring Boot') && text.includes('Spring Cloud')) {
               flyout.setAttribute('data-backend-route-menu', 'true')
-              const label = location.pathname.startsWith('/2.0/doc-microservice/') ? 'Cloud' : 'Boot'
+              const label = location.pathname.startsWith('/2.0/doc-cloud/') ? 'Cloud' : 'Boot'
               const textEl = flyout.querySelector('.button .text')
               if (textEl) {
                 textEl.textContent = label
@@ -221,16 +223,16 @@ export default defineConfig({
         text: '版本',
         items: [
           { text: 'v1.0', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/(doc-server|doc-web|doc-app)/' },
-          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-microservice|doc-web|doc-app)/' }
+          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-cloud|doc-web|doc-app)/' }
         ]
       },
       { text: '后端', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/doc-server/' },
       {
         text: '后端',
-        activeMatch: '^/2\\.0/(doc-server|doc-microservice)/',
+        activeMatch: '^/2\\.0/(doc-server|doc-cloud)/',
         items: [
           { text: 'Spring Boot', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/doc-server/' },
-          { text: 'Spring Cloud', link: '/2.0/doc-microservice/basic/overview', activeMatch: '^/2\\.0/doc-microservice/' }
+          { text: 'Spring Cloud', link: '/2.0/doc-cloud/basic/overview', activeMatch: '^/2\\.0/doc-cloud/' }
         ]
       },
       { text: '前端', link: '/1.0/doc-web/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-web/' },
@@ -242,6 +244,7 @@ export default defineConfig({
       '/1.0/doc-web/': sidebarDocWebV1,
       '/1.0/doc-app/': sidebarDocAppV1,
       '/2.0/doc-server/': sidebarDocServerV2,
+      '/2.0/doc-cloud/': sidebarDocCloudV2,
       '/2.0/doc-web/': sidebarDocWebV2,
       '/2.0/doc-app/': sidebarDocAppV2
     },

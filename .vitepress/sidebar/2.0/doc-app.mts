@@ -3,7 +3,7 @@ import type { SidebarItem } from '../types'
 
 export const sidebarDocAppV2: SidebarItem[] = [
   {
-    text: '移动端文档',
+    text: 'Uniapp 移动端文档',
     items: [
       {
         text: '基础',

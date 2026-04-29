@@ -3,7 +3,7 @@ import type { SidebarItem } from '../types'
 
 export const sidebarDocServerV2: SidebarItem[] = [
   {
-    text: '后端文档',
+    text: 'SpringBoot 后端文档',
     items: [
       {
         text: '基础',
