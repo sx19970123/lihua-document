@@ -9,18 +9,20 @@
 在最外层pom的 `properties` 中定义了各个依赖的版本信息
 
 ``` xml
-    <properties>
+     <properties>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
 
-        <lihua.version>2.0.0</lihua.version>
+        <project.version>2.0.2</project.version>
+        <spring-cloud.version>2025.1.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mysql.version>8.2.0</mysql.version>
         <mybatis-plus.version>3.5.16</mybatis-plus.version>
         <jwt.version>4.5.1</jwt.version>
         <redisson.version>4.2.0</redisson.version>
+        <caffeine.version>3.2.3</caffeine.version>
         <oshi.version>6.6.4</oshi.version>
-        <guava.version>33.5.0-jre</guava.version>
         <tianai-captcha.version>1.5.5</tianai-captcha.version>
         <ipaddress.version>5.5.1</ipaddress.version>
         <ip2region.version>3.2.0</ip2region.version>
@@ -28,7 +30,7 @@
         <fesod.version>2.0.1-incubating</fesod.version>
         <oss.version>3.18.5</oss.version>
         <spring-doc.version>3.0.2</spring-doc.version>
-        <snail-job.version>1.10.0-beta1</snail-job.version>
+        <snail-job.version>1.10.0</snail-job.version>
     </properties>
 ```
 

@@ -21,22 +21,18 @@
 
    ![image-20260320155845366](./module.assets/image-20260320155845366.png)
 
-4. 在最外层pom的dependencyManagement下，手动将新的业务模块引入，进行统一版本管理
+4. 创建项目启动类、yml配置文件、nacos对应配置
 
-   ![image-20260320160505565](./module.assets/image-20260320160505565.png)
+   ![image-20260430213246212](./module.assets/image-20260430213246212.png)
 
-5. `lihua-admin` 中添加新模块的依赖，`lihua-admin` 中包含系统启动类，需在此模块下引入系统所有模块（经过上一步后，无需填写依赖版本），引入完成后刷新Maven
+5. Nacos 新建对应配置
 
-   ![image-20260320160935232](./module.assets/image-20260320160935232.png)
+   ![image-20260430214019956](./module.assets/image-20260430214019956.png)
 
-6. 测试，新建测试 controller，验证请求是否能进入
+6. 启动对应微服务，注意端口号不要与现有服务重复
 
-   ![image-20241019135001625](./module.assets/image-20241019135001625.png)
+   ![image-20260430214235160](./module.assets/image-20260430214235160.png)
 
-7. 默认没有携带 `token` 的请求会被 `SpringSecurity` 拦截，可在 `lihua-base` - `lihua-security` - `com/lihua/security/config/SecurityConfig.java` 下新增临时白名单
+7. naocs 服务列表能正确识别到服务
 
-   ![image-20260320161829701](./module.assets/image-20260320161829701.png)
-
-8. 测试完成，通过url后端返回非401就表示测试成功了
-
-   ![image-20241019135714321](./module.assets/image-20241019135714321.png)
+   ![image-20260430214349759](./module.assets/image-20260430214349759.png)

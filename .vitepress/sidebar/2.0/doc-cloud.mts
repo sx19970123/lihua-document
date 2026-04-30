@@ -21,6 +21,8 @@ export const sidebarDocCloudV2: SidebarItem[] = [
           { text: 'service', link: '/2.0/doc-cloud/standard/service' },
           { text: 'mapper', link: '/2.0/doc-cloud/standard/mapper' },
           { text: '数据模型', link: '/2.0/doc-cloud/standard/data' },
+          { text: '远程调用', link: '/2.0/doc-cloud/standard/api' },
+          { text: '网关', link: '/2.0/doc-cloud/standard/gateway' },
         ]
       },
       {
@@ -29,6 +31,7 @@ export const sidebarDocCloudV2: SidebarItem[] = [
           { text: 'attachment 附件', link: '/2.0/doc-cloud/base/attachment' },
           { text: 'cache 系统缓存', link: '/2.0/doc-cloud/base/cache' },
           { text: 'captcha 验证码', link: '/2.0/doc-cloud/base/captcha' },
+          { text: 'client 远程调用', link: '/2.0/doc-cloud/base/client' },
           { text: 'common 公共模块', link: '/2.0/doc-cloud/base/common' },
           { text: 'dict 字典', link: '/2.0/doc-cloud/base/dict' },
           { text: 'doc 接口文档', link: '/2.0/doc-cloud/base/doc' },
