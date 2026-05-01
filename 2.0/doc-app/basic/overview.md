@@ -28,15 +28,7 @@
 
 ## 📦 下载体验（APK）
 
-- 👉 [狸花猫 APP 下载](https://gitee.com/yukino_git/lihua-app/releases/download/1.0.0/狸花猫APP.apk)
-
-::: info
-
-<div style="display:flex; flex-wrap:wrap; gap:8px;">
-	<img src="./overview.assets/qrcode.png" width="32%" />
-</div>
-
-:::
+- 👉 [狸花猫 APP 下载](https://gitee.com/yukino_git/lihua-assets/releases/download/2.1.0/Lihua.apk)
 
 
 
