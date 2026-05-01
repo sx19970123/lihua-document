@@ -92,17 +92,13 @@
 
 ### 配置文件
 
-1. 配置总揽，项目下有 `5` 个可启动服务，每个服务都包含 `application.yml` `application-dev.yml` `application-prod.yml` 三个配置文件
+1. 配置总揽，项目下有 `5` 个可启动服务，每个服务都包含 `application.yml` 配置文件
 
    ![image-20260429224832254](./start.assets/image-20260429224832254.png)
 
-   - **application.yml**：通用配置，项目中固定不变的配置
-   - **application-dev.yml**：开发配置，端口号及Nacos地址等配置，其余配置由 `Nacos` 管理
-   - **application-prod.yml**：生产配置，端口号及Nacos地址等配置，默认使用环境变量占位
+2. 本地配置包含nacos服务发现、配置中心和编码相关配置
 
-2. 本地配置nacos，nacos服务发现、配置中心在 `application-dev.yml` 和 `application-prod.yml` 中，由 `application.yml` 指定
-
-   ![image-20260429225600038](./start.assets/image-20260429225600038.png)
+   ![image-20260501223109670](./start.assets/image-20260501223109670.png)
 
 3. 微服务配置规范为
 

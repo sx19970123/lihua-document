@@ -1,6 +1,6 @@
 #  Lihua（狸花猫）多端权限管理系统
 
-Lihua（狸花猫）是一套基于 **Spring Boot + Vue + uni-app** 的多端权限管理解决方案，面向中后台业务场景设计，覆盖 **Web 管理端、App 端与微信小程序**，在权限体系、用户模型与业务能力上保持高度一致，支持快速部署与二次开发。
+Lihua（狸花猫）是一套基于 **Spring Boot / Cloud + Vue + uni-app** 的多端权限管理解决方案，面向中后台业务场景设计，覆盖 **Web 管理端、App 端与微信小程序**，在权限体系、用户模型与业务能力上保持高度一致，支持快速部署与二次开发。
 
 
 
@@ -14,12 +14,18 @@ Lihua（狸花猫）是一套基于 **Spring Boot + Vue + uni-app** 的多端权
 
 
 ## 🔗 相关资源
-
-- 🌐 在线体验：https://lihua.xyz
-- 🤖 AI 文档：https://deepwiki.com/sx19970123/lihua
 - 💬 技术交流群：850464676
 
+## 🧩 项目仓库
+### 单体版
+- Gitee：https://gitee.com/yukino_git/lihua
+- GitHub：https://github.com/sx19970123/lihua
+- GitCode：https://gitcode.com/weixin_44118742/lihua
 
+### 微服务版
+- Gitee：https://gitee.com/yukino_git/lihua-cloud
+- GitHub：https://github.com/sx19970123/lihua-cloud
+- GitCode：https://gitcode.com/weixin_44118742/lihua-cloud
 
 ## 🧭 多端架构概览
 

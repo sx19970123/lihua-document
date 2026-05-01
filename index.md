@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "Lihua"
   text: "狸花猫后台管理系统"
-  tagline: "Spring Boot 后端 · Vue 前端 · UniApp 移动端"
+  tagline: "Spring Boot / Cloud 后端 · Vue 前端 · UniApp 移动端"
   actions:
     - theme: alt
       text: 介绍
