@@ -142,6 +142,7 @@ hero:
       <button v-else class="video-cover" type="button" @click="videoStarted = true" aria-label="播放功能介绍视频">
         <img class="video-cover-img" src="/3.0/video-cover.jpg" alt="功能介绍视频封面" />
         <span class="video-cover-mask"></span>
+        <span class="video-cover-title">【开源】受够了一堆老旧的组件库！我花了几个通宵，把后台管理系统彻底重构了</span>
         <span class="video-play-btn" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.9l11-6.86a1.05 1.05 0 0 0 0-1.8l-11-6.86A1.05 1.05 0 0 0 8 5.14z"/></svg>
         </span>
@@ -1147,6 +1148,26 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
+/* 封面顶部标题条 */
+.video-cover-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(180deg, rgba(11, 13, 16, 0.72), rgba(11, 13, 16, 0));
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
 .video-play-btn {
   position: absolute;
   top: 50%;
@@ -1168,7 +1189,8 @@ onBeforeUnmount(() => {
 .video-play-btn svg {
   width: 30px;
   height: 30px;
-  margin-left: 4px;
+  /* path 三角在 viewBox 内中心偏右约 2.3/24，向左修正实现光学居中 */
+  margin-left: -3px;
 }
 
 .video-cover:hover .video-play-btn,
