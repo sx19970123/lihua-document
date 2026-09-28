@@ -202,16 +202,45 @@ hero:
   </div>
 </div>
 
+<!-- 右侧分区指示条 -->
+<nav class="page-dots" aria-label="页面分区导航">
+  <button
+    v-for="(s, i) in sections"
+    :key="s.id"
+    type="button"
+    class="page-dot"
+    :class="{ 'is-active': activeSection === i }"
+    :aria-label="s.label"
+    :title="s.label"
+    @click="goSection(i)"
+  ></button>
+</nav>
+
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const loginBgRoot = ref(null)
 const carouselLabel = ref('首页')
 const videoStarted = ref(false)
+const sections = [
+  { id: 'hero', label: '首页' },
+  { id: 'showcase', label: '功能预览' },
+  { id: 'video', label: '视频介绍' },
+  { id: 'feat', label: '特性' },
+  { id: 'cta', label: '开始使用' }
+]
+const activeSection = ref(0)
 let bgTimer = null
 let ctx = null
 let cleanMouse = null
 let cleanCarousel = null
+let sectionObserver = null
+
+// —— 右侧指示条：点击跳转对应分区 ——
+const goSection = (i) => {
+  const el = i === 0 ? document.querySelector('.VPHero') : document.querySelector('.' + sections[i].id)
+  el && el.scrollIntoView({ behavior: 'smooth' })
+}
 
 // —— 截图轮播：4s 自动切换、首尾循环、悬停暂停、箭头/圆点手动切换 ——
 const initCarousel = () => {
@@ -295,6 +324,20 @@ onMounted(async () => {
   initLoginBg()
   initCarousel()
 
+  // —— 分区指示条：观察各屏进入视口过半时点亮对应圆点 ——
+  sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const idx = sections.findIndex((s) => s.id === (entry.target.className.split(' ')[0] === 'VPHero' ? 'hero' : entry.target.className.split(' ')[0]))
+        if (idx !== -1) activeSection.value = idx
+      }
+    })
+  }, { threshold: 0.5 })
+  sections.forEach((s) => {
+    const el = s.id === 'hero' ? document.querySelector('.VPHero') : document.querySelector('.' + s.id)
+    el && sectionObserver.observe(el)
+  })
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')])
   gsap.registerPlugin(ScrollTrigger)
@@ -360,6 +403,7 @@ onBeforeUnmount(() => {
   if (ctx) ctx.revert()
   if (cleanMouse) cleanMouse()
   if (cleanCarousel) cleanCarousel()
+  if (sectionObserver) sectionObserver.disconnect()
 })
 </script>
 
@@ -1279,6 +1323,40 @@ html {
   transform: translateY(-2px);
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
+}
+
+/* ==================== 右侧分区指示条 ==================== */
+.page-dots {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.page-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.5);
+  cursor: pointer;
+  transition: width 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+.page-dot:hover {
+  background: rgba(148, 163, 184, 0.9);
+}
+
+.page-dot.is-active {
+  width: 10px;
+  height: 22px;
+  background: var(--vp-c-brand-1);
+  box-shadow: 0 0 10px -2px color-mix(in srgb, var(--vp-c-brand-1) 70%, transparent);
 }
 
 /* ==================== 响应式 ==================== */
