@@ -128,7 +128,7 @@ hero:
     <div class="video-box">
       <iframe
         class="video-player"
-        src="https://player.bilibili.com/player.html?isOutside=true&aid=117347281277004&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=0&mutedStart=1"
+        src="https://player.bilibili.com/player.html?isOutside=true&aid=117347281277004&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=0&danmaku=0&high_quality=1"
         scrolling="no"
         border="0"
         frameborder="no"

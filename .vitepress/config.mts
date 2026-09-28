@@ -32,6 +32,12 @@ export default defineConfig({
   // 浏览器标签页logo监听暗色模式变化
   head: [
     ['link', { rel: 'icon', href: '/miaomiao.png' }],
+    // 首页 B 站视频预连接（播放器与封面图 CDN）
+    ['link', { rel: 'preconnect', href: 'https://player.bilibili.com' }],
+    ['link', { rel: 'preconnect', href: 'https://i0.hdslb.com' }],
+    ['link', { rel: 'preconnect', href: 'https://i1.hdslb.com' }],
+    ['link', { rel: 'preconnect', href: 'https://i2.hdslb.com' }],
+    ['link', { rel: 'preconnect', href: 'https://s1.hdslb.com' }],
     ['script', {}, `
       (function() {
         const link = document.querySelector("link[rel='icon']")
