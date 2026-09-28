@@ -35,8 +35,12 @@ hero:
   <div class="login-bg-noise"></div>
 </div>
 
-<!-- 首页截图 · 浏览器外壳 · 3D 视差 -->
+<!-- 功能一览：核心界面轮播 -->
 <div class="showcase">
+  <div class="showcase-head">
+    <h2 class="showcase-title">功能一览</h2>
+    <p class="showcase-sub">核心页面实拍呈现，亮暗双模式自动切换。</p>
+  </div>
   <div class="showcase-scene">
     <div class="showcase-scroll">
       <div class="showcase-tilt">
@@ -350,6 +354,12 @@ onMounted(async () => {
     const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')])
     gsap.registerPlugin(ScrollTrigger)
 
+    // hero 入场（时间线此前多轮验证正常；曾致首屏空白的是已删除的退场 scrub）
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .from('.VPHero .text', { y: 28, opacity: 0, duration: 0.75 }, 0.05)
+      .from('.VPHero .tagline', { y: 22, opacity: 0, duration: 0.6 }, 0.22)
+      .from('.VPHero .actions .action', { y: 18, opacity: 0, duration: 0.5, stagger: 0.06 }, 0.34)
+
     ctx = gsap.context(() => {
       // 浏览器壳入场
       gsap.from('.showcase', { opacity: 0, y: 48, duration: 1, ease: 'power3.out', delay: 0.3 })
@@ -366,7 +376,11 @@ onMounted(async () => {
       gsap.to('.showcase-float', { y: 10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.5 })
 
       // —— 各区滚动联动动画（scrub：进度随滚动条驱动；起始态均为可见的位移态） ——
-      // 走马灯说明文字入画
+      // 走马灯：标题头与说明文字入画
+      gsap.fromTo('.showcase-head', { y: 40 }, {
+        y: 0, ease: 'none',
+        scrollTrigger: { trigger: '.showcase', start: 'top 80%', end: 'top 40%', scrub: 0.4 }
+      })
       gsap.fromTo('.browser-caption', { y: 34 }, {
         y: 0, ease: 'none',
         scrollTrigger: { trigger: '.showcase', start: 'top 75%', end: 'top 25%', scrub: 0.4 }
@@ -754,6 +768,30 @@ html:not(:has(.VPDoc)):not(:has(.VPPage))::-webkit-scrollbar {
   max-width: 1216px;
   margin: 0 auto;
   padding: var(--vp-nav-height) 24px 0;
+}
+
+/* 功能一览标题头（与视频区标题头同款） */
+.showcase-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+
+.showcase-title {
+  margin: 0 0 14px;
+  font-size: 34px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  border-top: none;
+  padding-top: 0;
+}
+
+.showcase-sub {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
 }
 
 .showcase-scene {
