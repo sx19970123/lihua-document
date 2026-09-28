@@ -667,18 +667,13 @@ onBeforeUnmount(() => {
   perspective: 1600px;
 }
 
+/* 滚动视差动画期间由浏览器自动提升合成层；不常驻 will-change（常驻强制合成层在 GPU 异常环境下会波及相邻内容渲染） */
 .showcase-scroll {
   transform-style: preserve-3d;
-  will-change: transform;
 }
 
 .showcase-tilt {
   transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.showcase-float {
-  will-change: transform;
 }
 
 .browser {
