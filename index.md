@@ -421,6 +421,15 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+/* 首页五区全屏分页，滚动条隐藏（右侧指示条承担位置反馈） */
+html:not(:has(.VPDoc)):not(:has(.VPPage)) {
+  scrollbar-width: none;
+}
+
+html:not(:has(.VPDoc)):not(:has(.VPPage))::-webkit-scrollbar {
+  display: none;
+}
+
 .VPHero,
 .showcase,
 .video,
