@@ -309,12 +309,14 @@ onMounted(async () => {
       .from('.VPHero .text', { y: 28, opacity: 0, duration: 0.75 }, 0.05)
       .from('.VPHero .tagline', { y: 22, opacity: 0, duration: 0.6 }, 0.22)
       .from('.VPHero .actions .action', { y: 18, opacity: 0, duration: 0.5, stagger: 0.06 }, 0.34)
-      // 下方区块与按钮同款上浮入场，不依赖滚动
-      .from('.feat-kicker', { y: 18, opacity: 0, duration: 0.5 }, 0.55)
-      .from('.feat-title', { y: 18, opacity: 0, duration: 0.55 }, 0.62)
-      .from('.feat-sub', { y: 18, opacity: 0, duration: 0.55 }, 0.7)
-      .from('.feat-card', { y: 18, opacity: 0, duration: 0.5, stagger: 0.08, clearProps: 'transform,opacity' }, 0.82)
-      .from('.cta > *', { y: 18, opacity: 0, duration: 0.55, stagger: 0.08 }, 1.05)
+      // 下方区块与按钮同款上移入场——不用 opacity:0 起始（from() 起始态在掉帧/后台标签环境下可能停留，
+      // 元素永久透明不可见；纯位移起始态可见，动画失败也无损可读性）
+      .from('.video-head', { y: 24, duration: 0.55 }, 0.5)
+      .from('.feat-kicker', { y: 18, duration: 0.5 }, 0.6)
+      .from('.feat-title', { y: 18, duration: 0.55 }, 0.66)
+      .from('.feat-sub', { y: 18, duration: 0.55 }, 0.72)
+      .from('.feat-card', { y: 18, duration: 0.5, stagger: 0.08, clearProps: 'transform,opacity' }, 0.84)
+      .from('.cta > *', { y: 18, duration: 0.55, stagger: 0.08 }, 1.05)
 
     // 浏览器壳入场
     gsap.from('.showcase', { opacity: 0, y: 48, duration: 1, ease: 'power3.out', delay: 0.5 })
