@@ -155,8 +155,8 @@ hero:
 <!-- 六大特性 -->
 <div class="feat">
   <div class="feat-head">
-    <h2 class="feat-title">一套代码，两端后端，四端复用</h2>
-    <p class="feat-sub">单体与微服务双形态后端按需取用，Web 管理端与移动端共用同一套账号权限，功能全端一致。</p>
+    <h2 class="feat-title">一套完整的后台，从服务端到移动端</h2>
+    <p class="feat-sub">后端提供单体与微服务两种形态，Web 管理端与移动端共用同一套账号权限，开箱即用。</p>
   </div>
   <div class="feat-grid">
     <div class="feat-card">
