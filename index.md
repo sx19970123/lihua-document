@@ -120,8 +120,7 @@ hero:
 <!-- 功能介绍视频：B 站外链播放器 -->
 <div class="video">
   <div class="video-head">
-    <p class="video-kicker">FEATURE TOUR</p>
-    <h2 class="video-title">从视频了解狸花猫</h2>
+    <h2 class="video-title">从视频了解</h2>
     <p class="video-sub">9 分钟带你走完登录、权限、系统管理与多端体验。</p>
   </div>
   <div class="video-frame">
@@ -156,9 +155,8 @@ hero:
 <!-- 六大特性 -->
 <div class="feat">
   <div class="feat-head">
-    <p class="feat-kicker">WHY LIHUA 3.0</p>
-    <h2 class="feat-title">一次搭建，四端复用</h2>
-    <p class="feat-sub">3.0 完成前后端仓库拆分，Boot / Cloud / Web / App 四仓独立演进、按需取用，权限模型与数据结构全端一致。</p>
+    <h2 class="feat-title">一套代码，两端后端，四端复用</h2>
+    <p class="feat-sub">单体与微服务双形态后端按需取用，Web 管理端与移动端共用同一套账号权限，功能全端一致。</p>
   </div>
   <div class="feat-grid">
     <div class="feat-card">
