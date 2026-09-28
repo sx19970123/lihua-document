@@ -329,22 +329,6 @@ onMounted(async () => {
 
     // 悬浮呼吸
     gsap.to('.showcase-float', { y: 10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.8 })
-
-    // 点击截图：滚动条平滑滚动，让截图区域居中占满视野（单纯移动滚动条，无放大）
-    const mm = gsap.matchMedia()
-    mm.add('(min-width: 769px)', () => {
-      const view = document.querySelector('.browser-view')
-      const showcase = document.querySelector('.showcase')
-      if (!view || !showcase) return
-      const onViewClick = () => {
-        const rect = showcase.getBoundingClientRect()
-        const target = window.scrollY + rect.top - (window.innerHeight - rect.height) / 2
-        if (Math.abs(window.scrollY - target) < 24) return
-        window.scrollTo({ top: Math.max(target, 0), behavior: 'smooth' })
-      }
-      view.addEventListener('click', onViewClick)
-      return () => view.removeEventListener('click', onViewClick)
-    })
   })
 
   // 鼠标 3D 视差（仅可悬浮设备）
@@ -386,6 +370,32 @@ onBeforeUnmount(() => {
   z-index: 1;
   margin-bottom: 0 !important;
   padding-bottom: 0;
+}
+
+/* ==================== 分屏吸附滚动：五个区域各占一屏 ==================== */
+html {
+  scroll-snap-type: y mandatory;
+}
+
+.VPHero,
+.showcase,
+.video,
+.feat,
+.cta {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* hero：内容置于导航栏之下并垂直居中（覆盖主题的负 margin 上提） */
+.VPHero {
+  margin-top: 0;
+  padding-top: calc(var(--vp-nav-height) + 24px);
+  padding-bottom: 24px;
 }
 
 .VPHomeHero .main {
@@ -659,8 +669,8 @@ onBeforeUnmount(() => {
 /* ==================== 浏览器外壳 · 3D 视差 ==================== */
 .showcase {
   max-width: 1216px;
-  margin: 12px auto 0;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: var(--vp-nav-height) 24px 0;
 }
 
 .showcase-scene {
@@ -925,8 +935,8 @@ onBeforeUnmount(() => {
 /* ==================== 六大特性 ==================== */
 .feat {
   max-width: 1216px;
-  margin: 96px auto 0;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: var(--vp-nav-height) 24px 0;
 }
 
 .feat-head {
@@ -1025,8 +1035,8 @@ onBeforeUnmount(() => {
 /* ==================== 功能介绍视频 ==================== */
 .video {
   max-width: 1216px;
-  margin: 72px auto 0;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: var(--vp-nav-height) 24px 0;
 }
 
 .video-head {
@@ -1211,8 +1221,8 @@ onBeforeUnmount(() => {
 /* ==================== 底部 CTA ==================== */
 .cta {
   max-width: 1216px;
-  margin: 104px auto 96px;
-  padding: 0 24px;
+  margin: 0 auto;
+  padding: var(--vp-nav-height) 24px 0;
   text-align: center;
 }
 
@@ -1277,14 +1287,6 @@ onBeforeUnmount(() => {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .feat {
-    margin-top: 72px;
-  }
-
-  .video {
-    margin-top: 72px;
-  }
-
   .video-title,
   .feat-title {
     font-size: 26px;
@@ -1309,10 +1311,6 @@ onBeforeUnmount(() => {
 
   .b-address span {
     display: none;
-  }
-
-  .cta {
-    margin: 80px auto 72px;
   }
 }
 
