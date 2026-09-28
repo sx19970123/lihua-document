@@ -117,26 +117,24 @@ hero:
   </div>
 </div>
 
-<!-- 功能介绍视频：B 站外链播放器直载 -->
+<!-- 在线实况：直接嵌入 lihua.xyz 真实系统页面 -->
 <div class="video">
   <div class="video-head">
-    <p class="video-kicker">FEATURE TOUR</p>
-    <h2 class="video-title">一眼看懂狸花猫</h2>
-    <p class="video-sub">从登录到系统管理，带你走完核心功能。</p>
+    <p class="video-kicker">LIVE DEMO</p>
+    <h2 class="video-title">亲眼所见，触手可及</h2>
+    <p class="video-sub">这里嵌入的是真实的在线环境，可直接交互体验（未登录时展示登录页）。</p>
   </div>
   <div class="video-frame">
     <div class="video-box">
       <iframe
         class="video-player"
-        src="https://player.bilibili.com/player.html?isOutside=true&aid=117347281277004&bvid=BV1BqaG6jEZX&cid=42268623181&p=1"
-        scrolling="no"
-        border="0"
+        src="https://lihua.xyz/index"
+        scrolling="yes"
         frameborder="no"
-        framespacing="0"
         allowfullscreen="true"
       ></iframe>
     </div>
-    <a class="video-bili-link" href="https://www.bilibili.com/video/BV1BqaG6jEZX" target="_blank" rel="noreferrer">在哔哩哔哩打开 ↗</a>
+    <a class="video-bili-link" href="https://lihua.xyz" target="_blank" rel="noreferrer">在新标签页打开在线环境 ↗</a>
   </div>
 </div>
 
