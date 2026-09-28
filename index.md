@@ -121,8 +121,8 @@ hero:
 <div class="video">
   <div class="video-head">
     <p class="video-kicker">FEATURE TOUR</p>
-    <h2 class="video-title">一眼看懂狸花猫</h2>
-    <p class="video-sub">从登录到系统管理，带你走完核心功能。</p>
+    <h2 class="video-title">从视频了解狸花猫</h2>
+    <p class="video-sub">9 分钟带你走完登录、权限、系统管理与多端体验。</p>
   </div>
   <div class="video-frame">
     <div class="video-box">
