@@ -350,14 +350,47 @@ onMounted(async () => {
       .from('.VPHero .text', { y: 28, opacity: 0, duration: 0.75 }, 0.05)
       .from('.VPHero .tagline', { y: 22, opacity: 0, duration: 0.6 }, 0.22)
       .from('.VPHero .actions .action', { y: 18, opacity: 0, duration: 0.5, stagger: 0.06 }, 0.34)
-      // 下方区块与按钮同款上移入场——不用 opacity:0 起始（from() 起始态在掉帧/后台标签环境下可能停留，
-      // 元素永久透明不可见；纯位移起始态可见，动画失败也无损可读性）
-      .from('.video-head', { y: 24, duration: 0.55 }, 0.5)
-      .from('.feat-kicker', { y: 18, duration: 0.5 }, 0.6)
-      .from('.feat-title', { y: 18, duration: 0.55 }, 0.66)
-      .from('.feat-sub', { y: 18, duration: 0.55 }, 0.72)
-      .from('.feat-card', { y: 18, duration: 0.5, stagger: 0.08, clearProps: 'transform,opacity' }, 0.84)
-      .from('.cta > *', { y: 18, duration: 0.55, stagger: 0.08 }, 1.05)
+
+    // —— 各区滚动联动动画（scrub：进度随滚动条驱动；起始态均为可见的位移态，动画不跑也不影响可读） ——
+    // hero 退场：滚离首屏时内容上浮淡出，回到首屏即复原
+    gsap.to('.VPHero .container', {
+      y: -70, opacity: 0.1, ease: 'none',
+      scrollTrigger: { trigger: '.VPHero', start: 'top top', end: 'bottom 35%', scrub: 0.4 }
+    })
+
+    // 走马灯说明文字入画
+    gsap.fromTo('.browser-caption', { y: 34 }, {
+      y: 0, ease: 'none',
+      scrollTrigger: { trigger: '.showcase', start: 'top 75%', end: 'top 25%', scrub: 0.4 }
+    })
+
+    // 视频区：标题与播放器先后入画
+    gsap.fromTo('.video-head', { y: 60 }, {
+      y: 0, ease: 'none',
+      scrollTrigger: { trigger: '.video', start: 'top 85%', end: 'top 35%', scrub: 0.4 }
+    })
+    gsap.fromTo('.video-box', { y: 90, scale: 0.97 }, {
+      y: 0, scale: 1, ease: 'none',
+      scrollTrigger: { trigger: '.video', start: 'top 80%', end: 'top 30%', scrub: 0.4 }
+    })
+
+    // 特性区：标题入画 + 卡片随滚动逐张上浮
+    gsap.fromTo('.feat-head', { y: 50 }, {
+      y: 0, ease: 'none',
+      scrollTrigger: { trigger: '.feat', start: 'top 85%', end: 'top 35%', scrub: 0.4 }
+    })
+    document.querySelectorAll('.feat-card').forEach((card) => {
+      gsap.fromTo(card, { y: 70 }, {
+        y: 0, ease: 'none',
+        scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 55%', scrub: 0.4 }
+      })
+    })
+
+    // CTA：标题与按钮依次入画
+    gsap.fromTo('.cta > *', { y: 50 }, {
+      y: 0, stagger: 0.2, ease: 'none',
+      scrollTrigger: { trigger: '.cta', start: 'top 85%', end: 'top 30%', scrub: 0.4 }
+    })
 
     // 浏览器壳入场
     gsap.from('.showcase', { opacity: 0, y: 48, duration: 1, ease: 'power3.out', delay: 0.5 })
@@ -1347,6 +1380,7 @@ html:not(:has(.VPDoc)):not(:has(.VPPage))::-webkit-scrollbar {
 }
 
 .page-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   padding: 0;
@@ -1354,7 +1388,15 @@ html:not(:has(.VPDoc)):not(:has(.VPPage))::-webkit-scrollbar {
   border-radius: 999px;
   background: rgba(148, 163, 184, 0.5);
   cursor: pointer;
-  transition: width 0.3s, background-color 0.3s, box-shadow 0.3s;
+  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+/* 视觉小点 + 大热区：伪元素外扩 9px，悬停/点击不再需要精确瞄准 */
+.page-dot::before {
+  content: '';
+  position: absolute;
+  inset: -9px;
+  border-radius: 10px;
 }
 
 .page-dot:hover {
