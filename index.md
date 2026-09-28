@@ -129,7 +129,7 @@ hero:
       <template v-if="videoStarted">
         <iframe
           class="video-player"
-          src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=1&danmaku=0&high_quality=1"
+          src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=1&danmaku=0"
           scrolling="no"
           frameborder="no"
           allowfullscreen="true"
@@ -147,6 +147,7 @@ hero:
         </button>
       </template>
     </div>
+    <a class="video-bili-link" href="https://www.bilibili.com/video/BV1BqaG6jEZX" target="_blank" rel="noreferrer">在哔哩哔哩打开 ↗</a>
   </div>
 </div>
 
@@ -1064,7 +1065,21 @@ onBeforeUnmount(() => {
 
 .video-frame {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.video-bili-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  text-decoration: none !important;
+  transition: color 0.25s;
+}
+
+.video-bili-link:hover {
+  color: var(--vp-c-brand-1);
 }
 
 .video-box {
