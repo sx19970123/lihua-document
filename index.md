@@ -117,24 +117,35 @@ hero:
   </div>
 </div>
 
-<!-- 功能介绍视频 -->
+<!-- 功能介绍视频：封面点击播放（首屏零依赖，点击后才加载 B 站播放器） -->
 <div class="video">
   <div class="video-head">
     <p class="video-kicker">FEATURE TOUR</p>
     <h2 class="video-title">一眼看懂狸花猫</h2>
-    <p class="video-sub">从登录到系统管理，3 分钟带你走完核心功能。</p>
+    <p class="video-sub">从登录到系统管理，带你走完核心功能。</p>
   </div>
   <div class="video-frame">
     <div class="video-box">
-      <iframe
-        class="video-player"
-        src="https://player.bilibili.com/player.html?isOutside=true&aid=117347281277004&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=0&danmaku=0&high_quality=1"
-        scrolling="no"
-        border="0"
-        frameborder="no"
-        framespacing="0"
-        allowfullscreen="true"
-      ></iframe>
+      <template v-if="videoStarted">
+        <iframe
+          class="video-player"
+          src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=1&danmaku=0&high_quality=1"
+          scrolling="no"
+          frameborder="no"
+          allowfullscreen="true"
+        ></iframe>
+      </template>
+      <template v-else>
+        <button class="video-cover" type="button" @click="videoStarted = true" aria-label="播放功能介绍视频">
+          <img class="video-cover-img" src="/3.0/video-cover.jpg" alt="功能介绍视频封面" />
+          <span class="video-cover-mask"></span>
+          <span class="video-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.9l11-6.86a1.05 1.05 0 0 0 0-1.8l-11-6.86A1.05 1.05 0 0 0 8 5.14z"/></svg>
+          </span>
+          <span class="video-duration">09:38</span>
+          <span class="video-cover-title">【开源】受够了一堆老旧的组件库！我花了几个通宵，把后台管理系统彻底重构了</span>
+        </button>
+      </template>
     </div>
   </div>
 </div>
@@ -195,6 +206,7 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const loginBgRoot = ref(null)
 const carouselLabel = ref('首页')
+const videoStarted = ref(false)
 let bgTimer = null
 let ctx = null
 let cleanMouse = null
@@ -1079,6 +1091,103 @@ onBeforeUnmount(() => {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 0;
+}
+
+/* 封面占位：点击后换成播放器 */
+.video-cover {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #0b0d10;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-cover-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.video-cover:hover .video-cover-img,
+.video-cover:focus-visible .video-cover-img {
+  transform: scale(1.025);
+}
+
+.video-cover-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(11, 13, 16, 0.62);
+  backdrop-filter: blur(6px) saturate(1.2);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  color: #fff;
+  box-shadow: 0 10px 34px -10px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.22) inset;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), background-color 0.3s, box-shadow 0.3s;
+}
+
+.video-play-btn svg {
+  width: 30px;
+  height: 30px;
+  margin-left: 4px;
+}
+
+.video-cover:hover .video-play-btn,
+.video-cover:focus-visible .video-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: var(--vp-c-brand-3);
+  box-shadow: 0 14px 40px -10px color-mix(in srgb, var(--vp-c-brand-1) 70%, transparent), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.video-duration {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(11, 13, 16, 0.78);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.video-cover-title {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ==================== 底部 CTA ==================== */
