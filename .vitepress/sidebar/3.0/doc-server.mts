@@ -1,0 +1,56 @@
+// @ts-ignore
+import type { SidebarItem } from '../types'
+
+export const sidebarDocServerV3: SidebarItem[] = [
+  {
+    text: 'SpringBoot 后端文档',
+    items: [
+      {
+        text: '基础',
+        items: [
+          { text: '概览', link: '/3.0/doc-server/basic/overview' },
+          { text: '项目启动', link: '/3.0/doc-server/basic/start' },
+          { text: '新增子模块', link: '/3.0/doc-server/basic/module' },
+          { text: '依赖维护', link: '/3.0/doc-server/basic/dependency' },
+          { text: 'AI 辅助开发', link: '/3.0/doc-server/basic/skills' },
+        ]
+      },
+      {
+        text: '开发规范',
+        items: [
+          { text: 'controller', link: '/3.0/doc-server/standard/controller' },
+          { text: 'service', link: '/3.0/doc-server/standard/service' },
+          { text: 'mapper', link: '/3.0/doc-server/standard/mapper' },
+          { text: '数据模型', link: '/3.0/doc-server/standard/data' },
+        ]
+      },
+      {
+        text: 'base 基础能力层',
+        items: [
+          { text: 'attachment 附件', link: '/3.0/doc-server/base/attachment' },
+          { text: 'cache 系统缓存', link: '/3.0/doc-server/base/cache' },
+          { text: 'captcha 验证码', link: '/3.0/doc-server/base/captcha' },
+          { text: 'common 公共模块', link: '/3.0/doc-server/base/common' },
+          { text: 'dict 字典', link: '/3.0/doc-server/base/dict' },
+          { text: 'doc 接口文档', link: '/3.0/doc-server/base/doc' },
+          { text: 'excel 导入导出', link: '/3.0/doc-server/base/excel' },
+          { text: 'ip 地址相关', link: '/3.0/doc-server/base/ip' },
+          { text: 'job 定时任务', link: '/3.0/doc-server/base/job' },
+          { text: 'log 系统日志', link: '/3.0/doc-server/base/log' },
+          { text: 'mybatis 持久化层', link: '/3.0/doc-server/base/mybatis' },
+          { text: 'security 系统安全', link: '/3.0/doc-server/base/security' },
+          { text: 'sensitive 数据脱敏', link: '/3.0/doc-server/base/sensitive' },
+          { text: 'web 配置', link: '/3.0/doc-server/base/web' },
+          { text: 'websocket 实时通信', link: '/3.0/doc-server/base/websocket' },
+        ]
+      },
+      {
+        text: '项目部署',
+        items: [
+          { text: '打包部署', link: '/3.0/doc-server/deploy/deploy' },
+          { text: 'docker部署', link: '/3.0/doc-server/deploy/docker' },
+        ]
+      }
+    ]
+  }
+]

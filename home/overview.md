@@ -1,6 +1,6 @@
-#  Lihua（狸花猫）多端权限管理系统
+# Lihua（狸花猫）多端权限管理系统
 
-Lihua（狸花猫）是一套基于 **Spring Boot / Cloud + Vue + uni-app** 的多端权限管理解决方案，面向中后台业务场景设计，覆盖 **Web 管理端、App 端与微信小程序**，在权限体系、用户模型与业务能力上保持高度一致，支持快速部署与二次开发。
+Lihua（狸花猫）是一套基于 **Spring Boot / Spring Cloud + Vue3 + uni-app** 的多端权限管理解决方案，面向中后台业务场景设计。3.0 起项目按端拆分为 **四个仓库**：Boot 单体后端、Cloud 微服务后端、Web 管理端与移动端 App，四端共用统一的账号、权限与数据模型，支持独立演进与按需取用。
 
 
 
@@ -13,25 +13,38 @@ Lihua（狸花猫）是一套基于 **Spring Boot / Cloud + Vue + uni-app** 的�
 
 
 
+## 🆕 3.0 新变化
+
+- **仓库拆分**：由 2.x 的全栈单仓拆分为四个独立仓库，后端提供 Boot 与 Cloud 双形态，前端与移动端独立成仓
+- **依赖升级**：Spring Boot 4.x + Java 25（虚拟线程默认开启）、Spring Cloud 2025.x + Nacos 3.x、Vue 3.5 + Antdv Next
+- **能力增强**：接口限流注解、登录失败锁定、权限变更「数据更新」红点提醒、附件下载 Range 断点协商、登录页时段氛围背景等
+- **安全加固**：全局异常固定文案防信息外泄、防重复提交支持参数排除、管理端公告预览与管理端预览链路分离
+
+::: info 提示
+Web 管理端与移动端可同时对接 Boot 单体版与 Cloud 微服务版后端，接口契约保持一致。
+:::
+
+
+
 ## 🔗 相关资源
 - 💬 技术交流群：850464676
 
-## 🧩 项目仓库
-### 单体版
-- Gitee：https://gitee.com/yukino_git/lihua
-- GitHub：https://github.com/sx19970123/lihua
-- GitCode：https://gitcode.com/weixin_44118742/lihua
+## 🧩 项目仓库（3.0 四端独立仓库）
 
-### 微服务版
-- Gitee：https://gitee.com/yukino_git/lihua-cloud
-- GitHub：https://github.com/sx19970123/lihua-cloud
-- GitCode：https://gitcode.com/weixin_44118742/lihua-cloud
+| 端 | 仓库 | 说明 |
+| --- | --- | --- |
+| 🏗️ 后端 · Boot | [lihua](https://gitee.com/yukino_git/lihua) | Spring Boot 单体版后端，开箱即用 |
+| 🕸️ 后端 · Cloud | [lihua-cloud](https://gitee.com/yukino_git/lihua-cloud) | Spring Cloud 微服务版后端 |
+| 💻 前端 · Web | [lihua-web](https://gitee.com/yukino_git/lihua-web) | Vue3 管理端，可共用双形态后端 |
+| 📱 移动端 · App | [lihua-app](https://gitee.com/yukino_git/lihua-app) | uni-app 移动端，适配 App / 小程序 |
+
+> 更多仓库请访问作者主页：https://gitee.com/yukino_git
 
 ## 🧭 多端架构概览
 
+- 🏗️ **后端双形态**：Spring Boot 单体快速起步，Spring Cloud 微服务弹性扩展，业务代码同源
 - 💻 **Web 管理端**：系统管理、权限配置、业务配置中心
-- 📱 **移动端 App**：面向业务使用者的移动应用
-- 🧩 **微信小程序**：轻量化业务入口，与 App 能力保持一致
+- 📱 **移动端 App**：适配 Android、iOS、鸿蒙与微信小程序，业务能力与 Web 端对齐
 
 各端共用统一的后端服务与权限模型，避免能力割裂。
 
@@ -59,7 +72,7 @@ Lihua（狸花猫）是一套基于 **Spring Boot / Cloud + Vue + uni-app** 的�
 
 ### 📢 通知公告
 
-- 集成 **Vditor** 富文本解析器
+- 集成富文本编辑器（TinyMCE）
 - 基于 **WebSocket** 实现消息实时推送
 - 支持公告发布、实时接收与历史查看
 
@@ -68,7 +81,7 @@ Lihua（狸花猫）是一套基于 **Spring Boot / Cloud + Vue + uni-app** 的�
 ### 👤 个人中心
 
 - 支持系统主题、布局与导航模式配置
-- 个性化设置即时生效
+- 个性化设置即时生效，并同步到服务端
 - 提升整体使用体验与可定制性
 
 
@@ -97,7 +110,7 @@ Lihua（狸花猫）是一套基于 **Spring Boot / Cloud + Vue + uni-app** 的�
 
 
 
-## 📱 移动端能力（Lihua App & 小程序）
+## 📱 移动端能力（Lihua App）
 
 Lihua App 是基于 **uni-app** 的移动端业务扩展方案，与 Web 管理端保持统一的数据模型与权限体系。
 
@@ -130,21 +143,21 @@ Lihua App 是基于 **uni-app** 的移动端业务扩展方案，与 Web 管理�
 
 ### 🧱 技术栈
 
-- 后端：Spring Boot
-- Web 前端：Vue
-- 移动端：uni-app
+- 后端：Spring Boot 4.x / Spring Cloud 2025.x
+- Web 前端：Vue 3 + Antdv Next
+- 移动端：uni-app（Vue 3）
 
 ### ⚡ 环境要求
 
-- Java 17+（推荐 Java 21）
+- Java 25
 
-  > Java 21 以下版本请移除虚拟线程相关配置，并自行配置线程池
+  > Java 21 可运行但需自行验证虚拟线程相关配置
 
 - MySQL 8.0+
 
 - Redis
 
-- Node.js 22+
+- Node.js 22+（Web 管理端）
 
 
 
@@ -154,6 +167,6 @@ Lihua App 是基于 **uni-app** 的移动端业务扩展方案，与 Web 管理�
 
 - 🏢 企业级后台管理系统基础框架
 - 🧱 多端业务系统的权限与组织底座
-- 📖 Spring Boot + Vue + uni-app 多端架构参考项目
+- 📖 Spring Boot / Cloud + Vue3 + uni-app 多端架构参考项目
 
 支持在此基础上进行功能裁剪与深度定制。

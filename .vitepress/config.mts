@@ -15,6 +15,14 @@ import { sidebarDocCloudV2 } from './sidebar/2.0/doc-cloud.mts'
 import { sidebarDocWebV2 } from './sidebar/2.0/doc-web.mts'
 // @ts-ignore
 import { sidebarDocAppV2 } from './sidebar/2.0/doc-app.mts'
+// @ts-ignore
+import { sidebarDocServerV3 } from './sidebar/3.0/doc-server.mts'
+// @ts-ignore
+import { sidebarDocCloudV3 } from './sidebar/3.0/doc-cloud.mts'
+// @ts-ignore
+import { sidebarDocWebV3 } from './sidebar/3.0/doc-web.mts'
+// @ts-ignore
+import { sidebarDocAppV3 } from './sidebar/3.0/doc-app.mts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -46,14 +54,29 @@ export default defineConfig({
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-web/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-app/"],
       .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-app/"],
-      .is-platform-nav-hidden .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"] {
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-server/"],
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-cloud/"],
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-web/"],
+      .is-platform-nav-hidden .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-app/"],
+      .is-platform-nav-hidden .VPFlyout[data-backend-route-menu="true"] {
         display: none !important;
       }
 
-      html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-cloud/"],
-      html:not(.is-doc-version-2) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
-      html:not(.is-doc-version-2) .VPNavBarMenu .VPFlyout[data-backend-route-menu="true"],
-      html.is-doc-version-2 .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"] {
+      /* 后端菜单三版本互斥：v1 显示单体链接，v2/v3 各自只显示自己的 Boot/Cloud 组 */
+      html:not(.is-doc-version-2):not(.is-doc-version-3) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
+      html:not(.is-doc-version-2):not(.is-doc-version-3) .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-cloud/"],
+      html:not(.is-doc-version-2):not(.is-doc-version-3) .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-server/"],
+      html:not(.is-doc-version-2):not(.is-doc-version-3) .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-cloud/"],
+      html:not(.is-doc-version-2):not(.is-doc-version-3) .VPNavBarMenu .VPFlyout:has(a[href^="/2.0/doc-cloud/"]),
+      html:not(.is-doc-version-2):not(.is-doc-version-3) .VPNavBarMenu .VPFlyout:has(a[href^="/3.0/doc-cloud/"]),
+      html.is-doc-version-2 .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"],
+      html.is-doc-version-2 .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-server/"],
+      html.is-doc-version-2 .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/doc-cloud/"],
+      html.is-doc-version-2 .VPNavBarMenu .VPFlyout:has(a[href^="/3.0/doc-cloud/"]),
+      html.is-doc-version-3 .VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/doc-server/"],
+      html.is-doc-version-3 .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-server/"],
+      html.is-doc-version-3 .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/doc-cloud/"],
+      html.is-doc-version-3 .VPNavBarMenu .VPFlyout:has(a[href^="/2.0/doc-cloud/"]) {
         display: none !important;
       }
 
@@ -73,11 +96,11 @@ export default defineConfig({
     ['script', {}, `
       (function() {
         const VERSION_KEY = 'lihua-doc-version'
-        const VERSIONS = ['1.0', '2.0']
-        const DEFAULT_VERSION = '1.0'
+        const VERSIONS = ['1.0', '2.0', '3.0']
+        const DEFAULT_VERSION = '3.0'
 
         function getVersionFromPath(pathname) {
-          const match = pathname.match(/^\\/(1\\.0|2\\.0)\\//)
+          const match = pathname.match(/^\\/(1\\.0|2\\.0|3\\.0)\\//)
           return match ? match[1] : null
         }
 
@@ -100,11 +123,11 @@ export default defineConfig({
         }
 
         function isVersionedDocPath(pathname) {
-          return /^\\/(1\\.0|2\\.0)\\/(doc-server|doc-cloud|doc-web|doc-app)\\//.test(pathname)
+          return /^\\/(1\\.0|2\\.0|3\\.0)\\/(doc-server|doc-cloud|doc-web|doc-app)\\//.test(pathname)
         }
 
         function isBackendRouteDocPath(pathname) {
-          return /^\\/2\\.0\\/(doc-server|doc-cloud)\\//.test(pathname)
+          return /^\\/(2\\.0|3\\.0)\\/(doc-server|doc-cloud)\\//.test(pathname)
         }
 
         function updateHiddenNavClass() {
@@ -112,7 +135,10 @@ export default defineConfig({
         }
 
         function updateVersionClass() {
-          document.documentElement.classList.toggle('is-doc-version-2', isVersionedDocPath(location.pathname) && getCurrentVersion() === '2.0')
+          const version = getCurrentVersion()
+          document.documentElement.classList.toggle('is-doc-version-1', version === '1.0')
+          document.documentElement.classList.toggle('is-doc-version-2', version === '2.0')
+          document.documentElement.classList.toggle('is-doc-version-3', version === '3.0')
           document.documentElement.classList.toggle('is-backend-route-doc', isBackendRouteDocPath(location.pathname))
         }
 
@@ -124,12 +150,11 @@ export default defineConfig({
 
           document.querySelectorAll('.VPNavBarMenu .VPNavBarMenuLink').forEach((el) => {
             const text = (el.textContent || '').trim()
-            if (text === '后端') el.setAttribute('href', '/1.0/doc-server/basic/overview')
             if (text === '前端') el.setAttribute('href', webPath)
             if (text === '移动端') el.setAttribute('href', appPath)
           })
 
-          document.querySelectorAll('.VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/"], .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/"]').forEach((el) => {
+          document.querySelectorAll('.VPNavBarMenu .VPNavBarMenuLink[href^="/1.0/"], .VPNavBarMenu .VPNavBarMenuLink[href^="/2.0/"], .VPNavBarMenu .VPNavBarMenuLink[href^="/3.0/"]').forEach((el) => {
             const href = el.getAttribute('href') || ''
             const match = href.match(/^\\/(1\\.0|2\\.0)\\//)
             if (!match) return
@@ -163,9 +188,9 @@ export default defineConfig({
             const text = (flyout.textContent || '').trim()
             if (text.includes('Spring Boot') && text.includes('Spring Cloud')) {
               flyout.setAttribute('data-backend-route-menu', 'true')
-              const label = location.pathname.startsWith('/2.0/doc-cloud/')
+              const label = location.pathname.startsWith('/2.0/doc-cloud/') || location.pathname.startsWith('/3.0/doc-cloud/')
                 ? 'Cloud'
-                : location.pathname.startsWith('/2.0/doc-server/')
+                : location.pathname.startsWith('/2.0/doc-server/') || location.pathname.startsWith('/3.0/doc-server/')
                   ? 'Boot'
                   : '后端'
               const textEl = flyout.querySelector('.button .text')
@@ -227,7 +252,8 @@ export default defineConfig({
         text: '版本',
         items: [
           { text: 'v1.0', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/(doc-server|doc-web|doc-app)/' },
-          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-cloud|doc-web|doc-app)/' }
+          { text: 'v2.0', link: '/2.0/doc-server/basic/overview', activeMatch: '^/2\\.0/(doc-server|doc-cloud|doc-web|doc-app)/' },
+          { text: 'v3.0 最新', link: '/3.0/doc-server/basic/overview', activeMatch: '^/3\\.0/(doc-server|doc-cloud|doc-web|doc-app)/' }
         ]
       },
       { text: '后端', link: '/1.0/doc-server/basic/overview', activeMatch: '^/1\\.0/doc-server/' },
@@ -239,8 +265,16 @@ export default defineConfig({
           { text: 'Spring Cloud', link: '/2.0/doc-cloud/basic/overview', activeMatch: '^/2\\.0/doc-cloud/' }
         ]
       },
-      { text: '前端', link: '/1.0/doc-web/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-web/' },
-      { text: '移动端', link: '/1.0/doc-app/basic/overview', activeMatch: '^/(1\\.0|2\\.0)/doc-app/' }
+      {
+        text: '后端',
+        activeMatch: '^/3\\.0/(doc-server|doc-cloud)/',
+        items: [
+          { text: 'Spring Boot', link: '/3.0/doc-server/basic/overview', activeMatch: '^/3\\.0/doc-server/' },
+          { text: 'Spring Cloud', link: '/3.0/doc-cloud/basic/overview', activeMatch: '^/3\\.0/doc-cloud/' }
+        ]
+      },
+      { text: '前端', link: '/3.0/doc-web/basic/overview', activeMatch: '^/(1\\.0|2\\.0|3\\.0)/doc-web/' },
+      { text: '移动端', link: '/3.0/doc-app/basic/overview', activeMatch: '^/(1\\.0|2\\.0|3\\.0)/doc-app/' }
     ],
     sidebar: {
       '/overview/': sidebarOverview,
@@ -250,7 +284,11 @@ export default defineConfig({
       '/2.0/doc-server/': sidebarDocServerV2,
       '/2.0/doc-cloud/': sidebarDocCloudV2,
       '/2.0/doc-web/': sidebarDocWebV2,
-      '/2.0/doc-app/': sidebarDocAppV2
+      '/2.0/doc-app/': sidebarDocAppV2,
+      '/3.0/doc-server/': sidebarDocServerV3,
+      '/3.0/doc-cloud/': sidebarDocCloudV3,
+      '/3.0/doc-web/': sidebarDocWebV3,
+      '/3.0/doc-app/': sidebarDocAppV3
     },
     outline: {
       level: [2, 6],      // 显示的标题级别：h2 到 h6
