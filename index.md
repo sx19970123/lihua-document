@@ -117,6 +117,28 @@ hero:
   </div>
 </div>
 
+<!-- 功能介绍视频 -->
+<div class="video">
+  <div class="video-head">
+    <p class="video-kicker">FEATURE TOUR</p>
+    <h2 class="video-title">一眼看懂狸花猫</h2>
+    <p class="video-sub">从登录到系统管理，3 分钟带你走完核心功能。</p>
+  </div>
+  <div class="video-frame">
+    <div class="video-box">
+      <iframe
+        class="video-player"
+        src="https://player.bilibili.com/player.html?isOutside=true&aid=117347281277004&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=0&mutedStart=1"
+        scrolling="no"
+        border="0"
+        frameborder="no"
+        framespacing="0"
+        allowfullscreen="true"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
 <!-- 六大特性 -->
 <div class="feat">
   <div class="feat-head">
@@ -990,6 +1012,75 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-2);
 }
 
+/* ==================== 功能介绍视频 ==================== */
+.video {
+  max-width: 1216px;
+  margin: 72px auto 0;
+  padding: 0 24px;
+}
+
+.video-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+
+.video-kicker {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--vp-c-brand-1);
+}
+
+.video-title {
+  margin: 0 0 14px;
+  font-size: 34px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  border-top: none;
+  padding-top: 0;
+}
+
+.video-sub {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+}
+
+.video-frame {
+  display: flex;
+  justify-content: center;
+}
+
+.video-box {
+  width: 100%;
+  max-width: 960px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  background: #0b0d10;
+  box-shadow:
+    0 34px 80px -30px rgba(15, 42, 92, 0.4),
+    0 16px 40px -22px rgba(15, 42, 92, 0.22);
+}
+
+.dark .video-box {
+  border-color: rgba(148, 163, 184, 0.2);
+  box-shadow:
+    0 38px 88px -32px rgba(0, 0, 0, 0.66),
+    0 16px 40px -24px rgba(0, 0, 0, 0.5);
+}
+
+.video-player {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
 /* ==================== 底部 CTA ==================== */
 .cta {
   max-width: 1216px;
@@ -1063,6 +1154,15 @@ onBeforeUnmount(() => {
     margin-top: 72px;
   }
 
+  .video {
+    margin-top: 72px;
+  }
+
+  .video-title,
+  .feat-title {
+    font-size: 26px;
+  }
+
   .b-address {
     min-width: 0;
     width: 40%;
@@ -1075,8 +1175,9 @@ onBeforeUnmount(() => {
     grid-template-columns: 1fr;
   }
 
+  .video-title,
   .feat-title {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .b-address span {
