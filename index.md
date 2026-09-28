@@ -321,6 +321,10 @@ const initLoginBg = () => {
 }
 
 onMounted(async () => {
+  // 刷新时强制回到首屏（禁用浏览器滚动位置恢复，防止载入即落在中部区域）
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+  window.scrollTo(0, 0)
+
   initLoginBg()
   initCarousel()
 
@@ -338,96 +342,89 @@ onMounted(async () => {
     el && sectionObserver.observe(el)
   })
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')])
-  gsap.registerPlugin(ScrollTrigger)
-
-  ctx = gsap.context(() => {
+  // hero 区不做任何动画（零 GSAP 依赖，保证首屏在任何环境都完整可见）
+  // 其余区块的滚动联动动画整体包裹：GSAP 加载或注册失败时页面保持自然可读状态
+  try {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) return
+    const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')])
+    gsap.registerPlugin(ScrollTrigger)
 
-    // hero 入场
-    gsap.timeline({ defaults: { ease: 'power3.out' } })
-      .from('.VPHero .text', { y: 28, opacity: 0, duration: 0.75 }, 0.05)
-      .from('.VPHero .tagline', { y: 22, opacity: 0, duration: 0.6 }, 0.22)
-      .from('.VPHero .actions .action', { y: 18, opacity: 0, duration: 0.5, stagger: 0.06 }, 0.34)
+    ctx = gsap.context(() => {
+      // 浏览器壳入场
+      gsap.from('.showcase', { opacity: 0, y: 48, duration: 1, ease: 'power3.out', delay: 0.3 })
 
-    // —— 各区滚动联动动画（scrub：进度随滚动条驱动；起始态均为可见的位移态，动画不跑也不影响可读） ——
-    // hero 退场：滚离首屏时内容上浮淡出，回到首屏即复原
-    gsap.to('.VPHero .container', {
-      y: -70, opacity: 0.1, ease: 'none',
-      scrollTrigger: { trigger: '.VPHero', start: 'top top', end: 'bottom 35%', scrub: 0.4 }
-    })
+      // 滚动 3D 视差：俯视角随滚动压平、上浮、放大
+      gsap.fromTo('.showcase-scroll',
+        { rotateX: 18, y: 90, scale: 0.9, transformPerspective: 1400 },
+        {
+          rotateX: 0, y: 0, scale: 1, ease: 'none',
+          scrollTrigger: { trigger: '.showcase', start: 'top 98%', end: 'top 40%', scrub: 0.5 }
+        })
 
-    // 走马灯说明文字入画
-    gsap.fromTo('.browser-caption', { y: 34 }, {
-      y: 0, ease: 'none',
-      scrollTrigger: { trigger: '.showcase', start: 'top 75%', end: 'top 25%', scrub: 0.4 }
-    })
+      // 悬浮呼吸
+      gsap.to('.showcase-float', { y: 10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.5 })
 
-    // 视频区：标题与播放器先后入画
-    gsap.fromTo('.video-head', { y: 60 }, {
-      y: 0, ease: 'none',
-      scrollTrigger: { trigger: '.video', start: 'top 85%', end: 'top 35%', scrub: 0.4 }
-    })
-    gsap.fromTo('.video-box', { y: 90, scale: 0.97 }, {
-      y: 0, scale: 1, ease: 'none',
-      scrollTrigger: { trigger: '.video', start: 'top 80%', end: 'top 30%', scrub: 0.4 }
-    })
-
-    // 特性区：标题入画 + 卡片随滚动逐张上浮
-    gsap.fromTo('.feat-head', { y: 50 }, {
-      y: 0, ease: 'none',
-      scrollTrigger: { trigger: '.feat', start: 'top 85%', end: 'top 35%', scrub: 0.4 }
-    })
-    document.querySelectorAll('.feat-card').forEach((card) => {
-      gsap.fromTo(card, { y: 70 }, {
+      // —— 各区滚动联动动画（scrub：进度随滚动条驱动；起始态均为可见的位移态） ——
+      // 走马灯说明文字入画
+      gsap.fromTo('.browser-caption', { y: 34 }, {
         y: 0, ease: 'none',
-        scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 55%', scrub: 0.4 }
+        scrollTrigger: { trigger: '.showcase', start: 'top 75%', end: 'top 25%', scrub: 0.4 }
+      })
+
+      // 视频区：标题与播放器先后入画
+      gsap.fromTo('.video-head', { y: 60 }, {
+        y: 0, ease: 'none',
+        scrollTrigger: { trigger: '.video', start: 'top 85%', end: 'top 35%', scrub: 0.4 }
+      })
+      gsap.fromTo('.video-box', { y: 90, scale: 0.97 }, {
+        y: 0, scale: 1, ease: 'none',
+        scrollTrigger: { trigger: '.video', start: 'top 80%', end: 'top 30%', scrub: 0.4 }
+      })
+
+      // 特性区：标题入画 + 卡片随滚动逐张上浮
+      gsap.fromTo('.feat-head', { y: 50 }, {
+        y: 0, ease: 'none',
+        scrollTrigger: { trigger: '.feat', start: 'top 85%', end: 'top 35%', scrub: 0.4 }
+      })
+      document.querySelectorAll('.feat-card').forEach((card) => {
+        gsap.fromTo(card, { y: 70 }, {
+          y: 0, ease: 'none',
+          scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 55%', scrub: 0.4 }
+        })
+      })
+
+      // CTA：标题与按钮依次入画
+      gsap.fromTo('.cta > *', { y: 50 }, {
+        y: 0, stagger: 0.2, ease: 'none',
+        scrollTrigger: { trigger: '.cta', start: 'top 85%', end: 'top 30%', scrub: 0.4 }
       })
     })
 
-    // CTA：标题与按钮依次入画
-    gsap.fromTo('.cta > *', { y: 50 }, {
-      y: 0, stagger: 0.2, ease: 'none',
-      scrollTrigger: { trigger: '.cta', start: 'top 85%', end: 'top 30%', scrub: 0.4 }
-    })
-
-    // 浏览器壳入场
-    gsap.from('.showcase', { opacity: 0, y: 48, duration: 1, ease: 'power3.out', delay: 0.5 })
-
-    // 滚动 3D 视差：俯视角随滚动压平、上浮、放大
-    gsap.fromTo('.showcase-scroll',
-      { rotateX: 18, y: 90, scale: 0.9, transformPerspective: 1400 },
-      {
-        rotateX: 0, y: 0, scale: 1, ease: 'none',
-        scrollTrigger: { trigger: '.showcase', start: 'top 98%', end: 'top 40%', scrub: 0.5 }
-      })
-
-    // 悬浮呼吸
-    gsap.to('.showcase-float', { y: 10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.8 })
-  })
-
-  // 鼠标 3D 视差（仅可悬浮设备）
-  const zone = document.querySelector('.showcase')
-  const tilt = document.querySelector('.showcase-tilt')
-  const canHover = window.matchMedia('(hover: hover)').matches
-  if (zone && tilt && canHover && !reduceMotion) {
-    const rx = gsap.quickTo(tilt, 'rotateX', { duration: 0.7, ease: 'power3.out' })
-    const ry = gsap.quickTo(tilt, 'rotateY', { duration: 0.7, ease: 'power3.out' })
-    const onMove = (e) => {
-      const r = tilt.getBoundingClientRect()
-      const px = (e.clientX - r.left) / r.width - 0.5
-      const py = (e.clientY - r.top) / r.height - 0.5
-      ry(px * 7)
-      rx(-py * 5)
+    // 鼠标 3D 视差（仅可悬浮设备）
+    const zone = document.querySelector('.showcase')
+    const tilt = document.querySelector('.showcase-tilt')
+    const canHover = window.matchMedia('(hover: hover)').matches
+    if (zone && tilt && canHover) {
+      const rx = gsap.quickTo(tilt, 'rotateX', { duration: 0.7, ease: 'power3.out' })
+      const ry = gsap.quickTo(tilt, 'rotateY', { duration: 0.7, ease: 'power3.out' })
+      const onMove = (e) => {
+        const r = tilt.getBoundingClientRect()
+        const px = (e.clientX - r.left) / r.width - 0.5
+        const py = (e.clientY - r.top) / r.height - 0.5
+        ry(px * 7)
+        rx(-py * 5)
+      }
+      const onLeave = () => { rx(0); ry(0) }
+      zone.addEventListener('mousemove', onMove)
+      zone.addEventListener('mouseleave', onLeave)
+      cleanMouse = () => {
+        zone.removeEventListener('mousemove', onMove)
+        zone.removeEventListener('mouseleave', onLeave)
+      }
     }
-    const onLeave = () => { rx(0); ry(0) }
-    zone.addEventListener('mousemove', onMove)
-    zone.addEventListener('mouseleave', onLeave)
-    cleanMouse = () => {
-      zone.removeEventListener('mousemove', onMove)
-      zone.removeEventListener('mouseleave', onLeave)
-    }
+  } catch (e) {
+    console.warn('首页动画初始化失败（页面内容不受影响）:', e)
   }
 })
 
