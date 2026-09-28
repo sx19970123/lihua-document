@@ -117,24 +117,38 @@ hero:
   </div>
 </div>
 
-<!-- 在线实况：直接嵌入 lihua.xyz 真实系统页面 -->
+<!-- 功能介绍视频：B 站外链播放器 -->
 <div class="video">
   <div class="video-head">
-    <p class="video-kicker">LIVE DEMO</p>
-    <h2 class="video-title">亲眼所见，触手可及</h2>
-    <p class="video-sub">这里嵌入的是真实的在线环境，可直接交互体验（未登录时展示登录页）。</p>
+    <p class="video-kicker">FEATURE TOUR</p>
+    <h2 class="video-title">一眼看懂狸花猫</h2>
+    <p class="video-sub">从登录到系统管理，带你走完核心功能。</p>
   </div>
   <div class="video-frame">
     <div class="video-box">
-      <iframe
-        class="video-player"
-        src="https://lihua.xyz/index"
-        scrolling="yes"
-        frameborder="no"
-        allowfullscreen="true"
-      ></iframe>
+      <template v-if="videoStarted">
+        <iframe
+          class="video-player"
+          src="https://player.bilibili.com/player.html?isOutside=true&aid=117347281277004&bvid=BV1BqaG6jEZX&cid=42268623181&p=1&autoplay=1"
+          title="狸花猫后台管理系统功能介绍"
+          scrolling="no"
+          border="0"
+          frameborder="no"
+          framespacing="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen="true"
+        ></iframe>
+      </template>
+      <button v-else class="video-cover" type="button" @click="videoStarted = true" aria-label="播放功能介绍视频">
+        <img class="video-cover-img" src="/3.0/video-cover.jpg" alt="功能介绍视频封面" />
+        <span class="video-cover-mask"></span>
+        <span class="video-play-btn" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72c0 .8.87 1.3 1.56.9l11-6.86a1.05 1.05 0 0 0 0-1.8l-11-6.86A1.05 1.05 0 0 0 8 5.14z"/></svg>
+        </span>
+        <span class="video-duration">09:38</span>
+      </button>
     </div>
-    <a class="video-bili-link" href="https://lihua.xyz" target="_blank" rel="noreferrer">在新标签页打开在线环境 ↗</a>
+    <a class="video-bili-link" href="https://www.bilibili.com/video/BV1BqaG6jEZX" target="_blank" rel="noreferrer">在哔哩哔哩打开 ↗</a>
   </div>
 </div>
 
@@ -194,6 +208,7 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const loginBgRoot = ref(null)
 const carouselLabel = ref('首页')
+const videoStarted = ref(false)
 let bgTimer = null
 let ctx = null
 let cleanMouse = null
@@ -1069,8 +1084,10 @@ onBeforeUnmount(() => {
 }
 
 .video-box {
+  position: relative;
   width: 100%;
   max-width: 960px;
+  aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(148, 163, 184, 0.42);
@@ -1088,10 +1105,88 @@ onBeforeUnmount(() => {
 }
 
 .video-player {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   border: 0;
+}
+
+/* B 站播放器受网络与浏览器解码能力影响；先展示本地封面，点击后再按需加载。 */
+.video-cover {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: #0b0d10;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-cover-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.video-cover:hover .video-cover-img,
+.video-cover:focus-visible .video-cover-img {
+  transform: scale(1.025);
+}
+
+.video-cover-mask {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), transparent 42%, rgba(0, 0, 0, 0.38));
+  pointer-events: none;
+}
+
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  background: rgba(11, 13, 16, 0.65);
+  box-shadow: 0 10px 34px -10px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.22) inset;
+  backdrop-filter: blur(6px) saturate(1.2);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), background-color 0.3s;
+}
+
+.video-play-btn svg {
+  width: 30px;
+  height: 30px;
+  margin-left: 4px;
+}
+
+.video-cover:hover .video-play-btn,
+.video-cover:focus-visible .video-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: var(--vp-c-brand-3);
+}
+
+.video-duration {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  color: #fff;
+  background: rgba(11, 13, 16, 0.78);
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 
